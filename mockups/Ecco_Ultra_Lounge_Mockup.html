@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecco Ultra Lounge — Hollywood, CA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --black2: #111;
+      --black3: #1a1a1a;
+      --magenta: #ff2d78;
+      --cyan: #00f0ff;
+      --gold: #ffd700;
+      --white: #f0f0f0;
+      --gray: #666;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .nav-logo, .btn, .bottle-tier-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Browser Chrome ── */
+    .browser-chrome {
+      background: #1c1c1e;
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid #333;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .mac-dots { display: flex; gap: 8px; }
+    .mac-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+    .mac-dot:nth-child(1) { background: #ff5f56; }
+    .mac-dot:nth-child(2) { background: #ffbd2e; }
+    .mac-dot:nth-child(3) { background: #27c93f; }
+    .url-bar {
+      flex: 1;
+      background: #2c2c2e;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: #aaa;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .url-bar .lock { color: #5e5ce6; font-size: 14px; }
+    .url-bar .url-path { color: #8e8e93; }
+    .url-bar .url-ecco { color: #fff; }
+    .badge {
+      background: linear-gradient(135deg, var(--magenta), var(--cyan));
+      color: #000;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 50px;
+      z-index: 99;
+    }
+    .nav-logo {
+      font-size: 24px;
+      background: linear-gradient(135deg, var(--magenta), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--magenta);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--magenta), #ff6b9d);
+      color: #fff;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 50px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .nav-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255,45,120,0.4);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      display: flex;
+      min-height: 85vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,45,120,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(0,240,255,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(255,215,0,0.06) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .hero-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 64px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 80px);
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .hero h1 .ecco-neon {
+      display: block;
+      font-size: clamp(64px, 9vw, 120px);
+      background: linear-gradient(135deg, var(--magenta), var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(255,45,120,0.3));
+      animation: neonPulse 3s ease-in-out infinite;
+    }
+    @keyframes neonPulse {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(255,45,120,0.3)) drop-shadow(0 0 60px rgba(0,240,255,0.15)); }
+      50% { filter: drop-shadow(0 0 50px rgba(255,45,120,0.5)) drop-shadow(0 0 90px rgba(0,240,255,0.3)); }
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: #888;
+      max-width: 480px;
+      margin: 20px 0 36px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--magenta), #ff6b9d);
+      color: #fff;
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+    .btn-primary:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 40px rgba(255,45,120,0.5);
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(255,45,120,0.3), 0 0 30px rgba(0,240,255,0.1); }
+      50% { box-shadow: 0 0 25px rgba(255,45,120,0.5), 0 0 50px rgba(0,240,255,0.2); }
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 25px rgba(0,240,255,0.2);
+      transform: scale(1.03);
+    }
+
+    .hero-right {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mask-image: linear-gradient(to left, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to left, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to left, transparent 30%, var(--black) 100%);
+    }
+    .hero-glass {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      right: 40px;
+      padding: 20px 24px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero-glass-item { text-align: center; }
+    .hero-glass-item .label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.12em; }
+    .hero-glass-item .value { font-size: 14px; color: #fff; font-weight: 600; font-family: 'Oswald', sans-serif; letter-spacing: 0.05em; }
+
+    /* ── Section Common ── */
+    .section {
+      padding: 100px 48px;
+      position: relative;
+    }
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--magenta);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .section-desc {
+      color: #888;
+      font-size: 16px;
+      max-width: 600px;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+    .section-title .highlight { color: var(--cyan); }
+
+    /* ── Events ── */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .event-card {
+      background: var(--black2);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--magenta), var(--cyan));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .event-card:hover::before { transform: scaleX(1); }
+    .event-card:hover {
+      border-color: rgba(255,45,120,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .event-date {
+      display: inline-block;
+      background: rgba(255,45,120,0.15);
+      color: var(--magenta);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .event-card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .event-card p {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .event-card .event-lineup {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .event-card .event-lineup span {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    /* ── Bottle Service ── */
+    .bottle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .bottle-card {
+      background: var(--black2);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+    }
+    .bottle-card.featured {
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(255,215,0,0.1);
+      transform: scale(1.04);
+    }
+    .bottle-card.featured::after {
+      content: 'BEST SELLER';
+      position: absolute;
+      top: 12px;
+      right: -28px;
+      background: var(--gold);
+      color: #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 32px;
+      transform: rotate(45deg);
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.1em;
+    }
+    .bottle-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .bottle-card.featured:hover { transform: scale(1.04) translateY(-6px); }
+    .bottle-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .bottle-tier-name {
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .bottle-tier-name.silver { color: #c0c0c0; }
+    .bottle-tier-name.gold { color: var(--gold); }
+    .bottle-tier-name.platinum { color: #e5e4e2; text-shadow: 0 0 20px rgba(229,228,226,0.3); }
+    .bottle-price {
+      font-size: 36px;
+      font-weight: 700;
+      font-family: 'Oswald', sans-serif;
+      color: #fff;
+      margin: 8px 0;
+    }
+    .bottle-price span {
+      font-size: 16px;
+      color: #888;
+      font-weight: 400;
+    }
+    .bottle-features {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .bottle-features li {
+      padding: 6px 0;
+      font-size: 14px;
+      color: #999;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .bottle-features li::before {
+      content: '✦ ';
+      color: var(--cyan);
+    }
+
+    /* ── Gallery ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--black2);
+      border: 1px solid var(--glass-border);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s, filter 0.6s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.2);
+    }
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+    .gallery-item .overlay span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+    .gallery-item:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16/6;
+    }
+
+    /* ── Info Strip ── */
+    .info-strip {
+      background: var(--black2);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      text-align: center;
+    }
+    .info-item h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: var(--magenta);
+      margin-bottom: 8px;
+    }
+    .info-item p {
+      color: #ccc;
+      font-size: 15px;
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background:
+        linear-gradient(135deg, rgba(255,45,120,0.08), rgba(0,240,255,0.06)),
+        var(--black);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 80px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 50%, rgba(255,45,120,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 70% 50%, rgba(0,240,255,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .cta-banner h2 {
+      font-size: clamp(32px, 5vw, 60px);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+    .cta-banner h2 .neon-text {
+      background: linear-gradient(135deg, var(--magenta), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: ctaGlow 2s ease-in-out infinite;
+    }
+    @keyframes ctaGlow {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(255,45,120,0.3)); }
+      50% { filter: drop-shadow(0 0 40px rgba(0,240,255,0.4)); }
+    }
+    .cta-banner p {
+      color: #888;
+      font-size: 18px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-banner .btn { position: relative; z-index: 2; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 48px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
+    footer .footer-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      background: linear-gradient(135deg, var(--magenta), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    footer p {
+      color: #555;
+      font-size: 13px;
+    }
+    footer .footer-email {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    footer .footer-email:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; flex-wrap: wrap; gap: 12px; }
+      .nav-links { gap: 18px; order: 3; width: 100%; justify-content: center; }
+      .hero { flex-direction: column; min-height: auto; }
+      .hero-left { padding: 60px 24px 40px; }
+      .hero-right { min-height: 300px; }
+      .hero-right img { mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%); }
+      .hero-right::after { background: linear-gradient(to top, var(--black) 10%, transparent 40%); }
+      .hero-glass { display: none; }
+      .section { padding: 60px 24px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { aspect-ratio: 4/3; }
+      .bottle-card.featured { transform: none; }
+      .bottle-card.featured:hover { transform: translateY(-6px); }
+      .info-strip { padding: 32px 24px; gap: 24px; }
+      .cta-banner { padding: 60px 24px; }
+      footer { padding: 32px 24px; }
+    }
+
+    @media (max-width: 500px) {
+      nav .nav-links { gap: 12px; flex-wrap: wrap; }
+      nav .nav-links a { font-size: 12px; }
+      .hero-left { padding: 40px 20px 30px; }
+      .hero-actions { flex-direction: column; }
+      .btn { justify-content: center; }
+      .badge { font-size: 9px; padding: 3px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Browser Chrome ── -->
+  <div class="browser-chrome">
+    <div class="mac-dots">
+      <span class="mac-dot"></span>
+      <span class="mac-dot"></span>
+      <span class="mac-dot"></span>
+    </div>
+    <div class="url-bar">
+      <span class="lock">🔒</span>
+      <span class="url-path">dannybproductions.com</span>
+      <span class="url-ecco">/ecco-ultra-lounge</span>
+    </div>
+    <span class="badge">✦ Proposed Redesign</span>
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="nav-logo">Ecco Ultra Lounge</div>
+    <ul class="nav-links">
+      <li><a href="#events">Events</a></li>
+      <li><a href="#bottle">Bottle Service</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Guest List</button>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">✦ Hollywood · Since 2019</div>
+      <h1>
+        Hollywood's Premier<br />Nightlife
+        <span class="ecco-neon">Ecco</span>
+      </h1>
+      <p class="hero-sub">
+        Step into the future of nightlife. Ultra-premium bottle service,
+        world-class DJs, and an electric atmosphere that defines Hollywood after dark.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary">Reserve a Table</button>
+        <button class="btn btn-secondary">View Events →</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img
+        src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=500&fit=crop&q=80"
+        alt="Nightclub atmosphere"
+        loading="lazy"
+      />
+      <div class="hero-glass">
+        <div class="hero-glass-item">
+          <div class="label">Capacity</div>
+          <div class="value">400 Guests</div>
+        </div>
+        <div class="hero-glass-item">
+          <div class="label">Sound</div>
+          <div class="value">Funktion-One</div>
+        </div>
+        <div class="hero-glass-item">
+          <div class="label">VIP</div>
+          <div class="value">12 Suites</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Events ── -->
+  <section class="section" id="events">
+    <div class="section-label">✦ Upcoming</div>
+    <h2 class="section-title">Events &amp; <span class="highlight">Experiences</span></h2>
+    <p class="section-desc">
+      Curated nights featuring the biggest names in electronic, hip-hop, and
+      house music. Every weekend is a spectacle.
+    </p>
+    <div class="events-grid">
+      <div class="event-card">
+        <span class="event-date">FRI · JUN 5</span>
+        <h3>Neon Nights</h3>
+        <p>
+          An immersive audio-visual experience with headliner DJ Astra spinning
+          deep house and melodic techno until dawn.
+        </p>
+        <div class="event-lineup">
+          <span>DJ Astra</span>
+          <span>Vera Kai</span>
+          <span>Luna Sol</span>
+        </div>
+      </div>
+      <div class="event-card">
+        <span class="event-date">SAT · JUN 13</span>
+        <h3>Platinum Sessions</h3>
+        <p>
+          Exclusive VIP affair featuring Grammy-nominated producer
+          Marcus Wright with a special live set.
+        </p>
+        <div class="event-lineup">
+          <span>Marcus Wright</span>
+          <span>DJ Razi</span>
+          <span>The 5th Element</span>
+        </div>
+      </div>
+      <div class="event-card">
+        <span class="event-date">SAT · JUN 27</span>
+        <h3>Midnight Masquerade</h3>
+        <p>
+          A masquerade-themed spectacle with aerial performers, costume
+          contests, and surprise guest DJs.
+        </p>
+        <div class="event-lineup">
+          <span>Black Velvet</span>
+          <span>DJ Orion</span>
+          <span>Special Guest</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bottle Service ── -->
+  <section class="section" id="bottle">
+    <div class="section-label">✦ Indulge</div>
+    <h2 class="section-title">Bottle <span class="highlight">Service</span></h2>
+    <p class="section-desc">
+      Elevate your night with premium bottle packages. Each tier includes
+      VIP hosting, mixers, and dedicated service.
+    </p>
+    <div class="bottle-grid">
+      <div class="bottle-card">
+        <span class="bottle-icon">🥂</span>
+        <div class="bottle-tier-name silver">Silver</div>
+        <div class="bottle-price">$450<span>+</span></div>
+        <ul class="bottle-features">
+          <li>Premium spirits selection</li>
+          <li>VIP table seating</li>
+          <li>Standard mixers &amp; garnishes</li>
+          <li>Dedicated server</li>
+          <li>Priority entry (2 guests)</li>
+        </ul>
+        <button class="btn btn-secondary" style="width:100%;">Reserve Silver</button>
+      </div>
+      <div class="bottle-card featured">
+        <span class="bottle-icon">🍾</span>
+        <div class="bottle-tier-name gold">Gold</div>
+        <div class="bottle-price">$950<span>+</span></div>
+        <ul class="bottle-features">
+          <li>Top-shelf spirits + Champagne</li>
+          <li>Premium VIP booth</li>
+          <li>Premium mixers &amp; garnishes</li>
+          <li>Personal bottle hostess</li>
+          <li>Priority entry (4 guests)</li>
+          <li>Complimentary champagne toast</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;">Reserve Gold</button>
+      </div>
+      <div class="bottle-card">
+        <span class="bottle-icon">✨</span>
+        <div class="bottle-tier-name platinum">Platinum</div>
+        <div class="bottle-price">$2,500<span>+</span></div>
+        <ul class="bottle-features">
+          <li>Ultra-premium spirits + rare vintages</li>
+          <li>Sky-view VIP suite</li>
+          <li>Gourmet mixers &amp; caviar</li>
+          <li>Dedicated VIP concierge</li>
+          <li>Priority entry (8 guests)</li>
+          <li>Private security detail</li>
+          <li>Custom bottle engraving</li>
+        </ul>
+        <button class="btn btn-secondary" style="width:100%;">Reserve Platinum</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Gallery ── -->
+  <section class="section" id="gallery">
+    <div class="section-label">✦ Moments</div>
+    <h2 class="section-title">The <span class="highlight">Experience</span></h2>
+    <p class="section-desc">
+      A glimpse into the world of Ecco — where every night is an event.
+    </p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1571266020659-83e6e4f7b431?w=900&h=350&fit=crop&q=80"
+          alt="Nightclub crowd"
+          loading="lazy"
+        />
+        <div class="overlay"><span>Main Floor — Peak Hour</span></div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1560523159-4a9692d222f3?w=450&h=340&fit=crop&q=80"
+          alt="VIP section"
+          loading="lazy"
+        />
+        <div class="overlay"><span>VIP Lounge</span></div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=450&h=340&fit=crop&q=80"
+          alt="DJ booth"
+          loading="lazy"
+        />
+        <div class="overlay"><span>DJ Booth — Live Set</span></div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=450&h=340&fit=crop&q=80"
+          alt="Cocktail bar"
+          loading="lazy"
+        />
+        <div class="overlay"><span>Signature Cocktails</span></div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1576336272515-138ecb6e7d2f?w=450&h=340&fit=crop&q=80"
+          alt="Dance floor"
+          loading="lazy"
+        />
+        <div class="overlay"><span>Dance Floor — Neon Lights</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Info Strip ── -->
+  <div class="info-strip" id="contact">
+    <div class="info-item">
+      <h4>✦ Location</h4>
+      <p>6506 Hollywood Blvd<br />Hollywood, CA 90028</p>
+    </div>
+    <div class="info-item">
+      <h4>✦ Hours</h4>
+      <p>Wed – Sun<br />9:00 PM – 2:00 AM</p>
+    </div>
+    <div class="info-item">
+      <h4>✦ Contact</h4>
+      <p>info@dannybproductions.com<br />(323) 555-ECCO</p>
+    </div>
+    <div class="info-item">
+      <h4>✦ Dress Code</h4>
+      <p>Upscale / No athletic wear<br />VIP dress to impress</p>
+    </div>
+  </div>
+
+  <!-- ── CTA Banner ── -->
+  <section class="cta-banner">
+    <h2>
+      Your Website Is<br />
+      <span class="neon-text">Dead — Let's Bring It Back</span>
+    </h2>
+    <p>
+      The current site is unresponsive. This is a proposed redesign —
+      modern, fast, and built to convert. Let's make EccoUltraLounge.com
+      the premiere nightlife destination online.
+    </p>
+    <button class="btn btn-primary">Let's Build It</button>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-logo">Ecco Ultra Lounge</div>
+    <p>
+      Hollywood's premier ultra-lounge experience.<br />
+      Managed by <a href="mailto:info@dannybproductions.com" class="footer-email">Danny B Productions</a>
+    </p>
+    <p style="margin-top:12px;font-size:11px;color:#444;">
+      &copy; 2025 Ecco Ultra Lounge &middot; Proposed Redesign Mockup &middot; All rights reserved
+    </p>
+  </footer>
+
+</body>
+</html>

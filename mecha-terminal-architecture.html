@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MECHA TERMINAL // ARCHITECTURE</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #020617;
+  font-family: 'JetBrains Mono', monospace;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+.diagram-container {
+  max-width: 1100px;
+  width: 100%;
+}
+/* Header */
+.header {
+  margin-bottom: 32px;
+}
+.header .dot-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.header .pulse-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #a78bfa;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(167,139,250,0.7); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(167,139,250,0); }
+}
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #a78bfa;
+}
+.header .subtitle {
+  font-size: 11px;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+/* SVG Card */
+.svg-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+.svg-card svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+/* Summary Cards */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 18px;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.card-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.card-dot.purple { background: #a78bfa; }
+.card-dot.cyan { background: #22d3ee; }
+.card-dot.amber { background: #fbbf24; }
+.card h3 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+.card ul {
+  list-style: none;
+}
+.card li {
+  font-size: 10px;
+  color: #64748b;
+  line-height: 1.7;
+  padding-left: 0;
+}
+.card li::before {
+  content: '•';
+  color: #334155;
+  margin-right: 6px;
+}
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 16px 0 8px;
+}
+.footer span {
+  font-size: 9px;
+  color: #334155;
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+<div class="diagram-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="dot-row">
+      <div class="pulse-dot"></div>
+      <h1>MECHA TERMINAL // SYSTEM ARCHITECTURE</h1>
+    </div>
+    <div class="subtitle">Tactical JRPG Portfolio — Next.js 16 / React 19 / Framer Motion 12</div>
+  </div>
+
+  <!-- Main SVG Diagram -->
+  <div class="svg-card">
+    <svg viewBox="0 0 1000 720" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+      <!-- Grid background -->
+      <rect width="1000" height="720" fill="#020617"/>
+      <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0L0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+      </pattern>
+      <rect width="1000" height="720" fill="url(#g)"/>
+
+      <!-- ===== ARROWS (drawn first to stay behind boxes) ===== -->
+      <defs>
+        <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10" fill="#22d3ee"/>
+        </marker>
+        <marker id="arrow-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10" fill="#a78bfa"/>
+        </marker>
+        <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10" fill="#34d399"/>
+        </marker>
+        <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10" fill="#94a3b8"/>
+        </marker>
+        <marker id="arrow-rose" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10" fill="#fb7185"/>
+        </marker>
+        <filter id="glow">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#a78bfa" flood-opacity="0.25"/>
+        </filter>
+      </defs>
+
+      <!-- ===== CONNECTIONS ===== -->
+
+      <!-- Layout → Shell -->
+      <line x1="500" y1="62" x2="500" y2="100" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)" opacity="0.6"/>
+
+      <!-- Shell → Navigation -->
+      <line x1="160" y1="152" x2="160" y2="185" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-violet)" opacity="0.6"/>
+
+      <!-- Shell → Core Stage -->
+      <line x1="500" y1="152" x2="500" y2="200" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-violet)" opacity="0.6"/>
+
+      <!-- Shell → Tabs -->
+      <line x1="840" y1="152" x2="840" y2="200" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-violet)" opacity="0.6"/>
+
+      <!-- Core Stage → MechDisplay -->
+      <line x1="380" y1="285" x2="300" y2="320" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)" opacity="0.6"/>
+      <!-- Core Stage → DyeGuyPatrol -->
+      <line x1="380" y1="285" x2="300" y2="385" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)" opacity="0.6"/>
+      <!-- Core Stage → ReelTab -->
+      <line x1="420" y1="285" x2="460" y2="320" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)" opacity="0.6"/>
+      <!-- Core Stage → WorkTab -->
+      <line x1="420" y1="285" x2="460" y2="385" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)" opacity="0.6"/>
+      <!-- Core Stage → CodecContact -->
+      <line x1="420" y1="285" x2="460" y2="450" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)" opacity="0.6"/>
+
+      <!-- Tabs area connections -->
+      <line x1="680" y1="260" x2="620" y2="320" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.4"/>
+      <line x1="680" y1="260" x2="620" y2="385" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.4"/>
+      <line x1="680" y1="260" x2="620" y2="450" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.4"/>
+      <line x1="680" y1="260" x2="840" y2="320" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.4"/>
+      <line x1="680" y1="260" x2="840" y2="385" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.4"/>
+
+      <!-- Patrol → Assets -->
+      <line x1="220" y1="410" x2="220" y2="460" stroke="#fb7185" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-rose)" opacity="0.5"/>
+
+      <!-- Asset Layer → Deploy -->
+      <line x1="500" y1="540" x2="500" y2="590" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow-slate)" opacity="0.6"/>
+
+      <!-- ===== SECTION LABELS ===== -->
+      <text x="500" y="52" text-anchor="middle" fill="#22d3ee" font-size="10" font-weight="600" letter-spacing="0.15em">FRONTEND LAYER // Next.js 16 + React 19</text>
+
+      <!-- ===== COMPONENT BOXES ===== -->
+
+      <!-- MechaShell / MobileShell -->
+      <rect x="365" y="105" width="270" height="42" rx="6" fill="rgba(8,51,68,0.5)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="500" y="127" text-anchor="middle" fill="#22d3ee" font-size="13" font-weight="600">MechaShell / MobileShell</text>
+      <text x="500" y="140" text-anchor="middle" fill="#64748b" font-size="8">Responsive Shell — Desktop / Mobile</text>
+
+      <!-- Navigation -->
+      <rect x="55" y="190" width="210" height="42" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="160" y="212" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="600">Navigation</text>
+      <text x="160" y="225" text-anchor="middle" fill="#64748b" font-size="8">NavSidebar · Header · BottomBar</text>
+
+      <!-- Core Stage -->
+      <rect x="360" y="205" width="280" height="70" rx="8" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.8" filter="url(#glow)"/>
+      <text x="500" y="230" text-anchor="middle" fill="#34d399" font-size="13" font-weight="600" letter-spacing="0.05em">CENTER STAGE // Core Renderer</text>
+      <text x="500" y="246" text-anchor="middle" fill="#64748b" font-size="9">Animated Tab Router · Framer Motion Transitions</text>
+      <text x="500" y="262" text-anchor="middle" fill="#64748b" font-size="8">BootSequence → STATUS → WORK → REEL → MUSIC → WEBSITES → CONTACT</text>
+
+      <!-- MechDisplay -->
+      <rect x="225" y="320" width="150" height="42" rx="6" fill="rgba(76,29,149,0.35)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="300" y="340" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">MechDisplay</text>
+      <text x="300" y="354" text-anchor="middle" fill="#64748b" font-size="8">DECKMECH Core Unit — Sprite</text>
+
+      <!-- DyeGuyPatrol -->
+      <rect x="225" y="387" width="150" height="42" rx="6" fill="rgba(76,29,149,0.35)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="300" y="407" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600">DyeGuyPatrol</text>
+      <text x="300" y="421" text-anchor="middle" fill="#64748b" font-size="8">AI Patrol Circuit · Animations</text>
+
+      <!-- Work Tab Panel -->
+      <rect x="400" y="320" width="190" height="40" rx="6" fill="rgba(8,51,68,0.35)" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="495" y="341" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="600">WorkTab / ReelTab / MusicTab</text>
+      <text x="495" y="354" text-anchor="middle" fill="#64748b" font-size="8">Portfolio Content Grids</text>
+
+      <!-- WebsitesTab -->
+      <rect x="400" y="385" width="190" height="40" rx="6" fill="rgba(8,51,68,0.35)" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="495" y="406" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="600">WebsitesTab / StatsSidebar</text>
+      <text x="495" y="419" text-anchor="middle" fill="#64748b" font-size="8">Live Previews · GitHub Stats</text>
+
+      <!-- Codec -->
+      <rect x="400" y="450" width="190" height="42" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="495" y="470" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600">MgsCodecContact</text>
+      <text x="495" y="484" text-anchor="middle" fill="#64748b" font-size="8">CODEC Contact · EmailJS Gateway</text>
+
+      <!-- Tab Sidebar placeholder -->
+      <rect x="740" y="205" width="200" height="42" rx="6" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4,3"/>
+      <text x="840" y="227" text-anchor="middle" fill="#64748b" font-size="10" font-weight="500">Tab Sidebar UI</text>
+      <text x="840" y="240" text-anchor="middle" fill="#475569" font-size="8">Navigation State · Active Tab</text>
+
+      <!-- Extra Tab boxes -->
+      <rect x="740" y="270" width="200" height="35" rx="6" fill="rgba(30,41,59,0.3)" stroke="#94a3b8" stroke-width="1"/>
+      <text x="840" y="292" text-anchor="middle" fill="#94a3b8" font-size="9">StatsSidebar (Right Panel)</text>
+
+      <rect x="740" y="320" width="200" height="35" rx="6" fill="rgba(30,41,59,0.3)" stroke="#94a3b8" stroke-width="1"/>
+      <text x="840" y="342" text-anchor="middle" fill="#94a3b8" font-size="9">Lightbox (Overlay)</text>
+
+      <rect x="740" y="385" width="200" height="35" rx="6" fill="rgba(30,41,59,0.3)" stroke="#94a3b8" stroke-width="1"/>
+      <text x="840" y="407" text-anchor="middle" fill="#94a3b8" font-size="9">AudioAmbience (Web Audio)</text>
+
+      <!-- ===== ASSET LAYER ===== -->
+      <rect x="60" y="465" width="380" height="65" rx="6" fill="rgba(120,53,15,0.25)" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <text x="250" y="490" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">ASSET &amp; ANIMATION LAYER</text>
+      <text x="250" y="507" text-anchor="middle" fill="#64748b" font-size="8">PixelLab Sprites · Animation Sheets · Audio Files</text>
+      <text x="250" y="520" text-anchor="middle" fill="#475569" font-size="8">CDN (Backblaze) · Local public/assets</text>
+
+      <!-- ===== BUILD / DEPLOY ===== -->
+      <rect x="250" y="595" width="500" height="52" rx="8" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="500" y="618" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">BUILD / DEPLOY PIPELINE</text>
+      <text x="500" y="634" text-anchor="middle" fill="#64748b" font-size="8">next build → static export (out/) → Porkbun cPanel</text>
+
+      <!-- Deploy sub-boxes -->
+      <rect x="270" y="648" width="90" height="28" rx="4" fill="rgba(30,41,59,0.4)" stroke="#475569" stroke-width="1"/>
+      <text x="315" y="667" text-anchor="middle" fill="#64748b" font-size="8">next build</text>
+
+      <rect x="395" y="648" width="90" height="28" rx="4" fill="rgba(30,41,59,0.4)" stroke="#475569" stroke-width="1"/>
+      <text x="440" y="667" text-anchor="middle" fill="#64748b" font-size="8">Static Export</text>
+
+      <rect x="520" y="648" width="90" height="28" rx="4" fill="rgba(30,41,59,0.4)" stroke="#475569" stroke-width="1"/>
+      <text x="565" y="667" text-anchor="middle" fill="#64748b" font-size="8">cPanel Upload</text>
+
+      <rect x="645" y="648" width="90" height="28" rx="4" fill="rgba(30,41,59,0.4)" stroke="#475569" stroke-width="1"/>
+      <text x="690" y="667" text-anchor="middle" fill="#64748b" font-size="8">dyedesign.xyz</text>
+
+      <!-- Arrow between build steps -->
+      <line x1="360" y1="662" x2="395" y2="662" stroke="#475569" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.5"/>
+      <line x1="485" y1="662" x2="520" y2="662" stroke="#475569" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.5"/>
+      <line x1="610" y1="662" x2="645" y2="662" stroke="#475569" stroke-width="1" marker-end="url(#arrow-slate)" opacity="0.5"/>
+
+      <!-- Legend -->
+      <rect x="750" y="465" width="200" height="175" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="850" y="488" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="0.1em">LEGEND</text>
+
+      <circle cx="770" cy="505" r="4" fill="#22d3ee"/>
+      <text x="782" y="509" fill="#64748b" font-size="9">Frontend / UI Layer</text>
+
+      <circle cx="770" cy="525" r="4" fill="#34d399"/>
+      <text x="782" y="529" fill="#64748b" font-size="9">Core Logic / Renderer</text>
+
+      <circle cx="770" cy="545" r="4" fill="#a78bfa"/>
+      <text x="782" y="549" fill="#64748b" font-size="9">Display Components</text>
+
+      <circle cx="770" cy="565" r="4" fill="#fbbf24"/>
+      <text x="782" y="569" fill="#64748b" font-size="9">Asset Layer</text>
+
+      <circle cx="770" cy="585" r="4" fill="#94a3b8"/>
+      <text x="782" y="589" fill="#64748b" font-size="9">Build / Deploy</text>
+
+      <circle cx="770" cy="605" r="4" fill="#fb7185"/>
+      <text x="782" y="609" fill="#64748b" font-size="9">Data Flow (Dashed = Async)</text>
+    </svg>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot cyan"></div>
+        <h3>Frontend Stack</h3>
+      </div>
+      <ul>
+        <li>Next.js 16 — Static Export (RSC)</li>
+        <li>React 19 — Server &amp; Client Components</li>
+        <li>Framer Motion 12 — AnimatePresence</li>
+        <li>Tailwind CSS v4 — Utility Styling</li>
+        <li>TypeScript 5 — Strict Mode</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot purple"></div>
+        <h3>Interactive Systems</h3>
+      </div>
+      <ul>
+        <li>DYE GUY Patrol — Canvas AI Pathfinding</li>
+        <li>MechDisplay — PixelArt Gundam Sprite</li>
+        <li>BootSequence — Terminal Boot Animation</li>
+        <li>MgsCodecContact — CODEC Encrypted Comms</li>
+        <li>AudioAmbience — Web Audio API Synth</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot amber"></div>
+        <h3>Deployment</h3>
+      </div>
+      <ul>
+        <li>Static Export → Porkbun cPanel</li>
+        <li>PixelLab Assets via Backblaze CDN</li>
+        <li>EmailJS for Contact Gateway</li>
+        <li>Mobile-first Responsive Shell</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>MECHA TERMINAL // CORE ARCHITECTURE — GENERATED FROM SOURCE</span>
+  </div>
+
+</div>
+</body>
+</html>

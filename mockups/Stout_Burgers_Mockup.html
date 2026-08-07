@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STOUT — Burgers & Beers | Hollywood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1A1614;
+    --surface: #231F1C;
+    --surface-hover: #2A2623;
+    --border: rgba(255,255,255,0.06);
+    --primary: #C73E2B;
+    --primary-hover: #D94A36;
+    --amber: #D4A54A;
+    --amber-dim: rgba(212,165,74,0.15);
+    --text: #EDE8E1;
+    --muted: #8A7A6E;
+    --white: #FFFFFF;
+
+    --font-primary: 'Poppins', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-full: 999px;
+
+    --shadow-glow: 0 0 30px rgba(199,62,43,0.15);
+    --shadow-card: 0 4px 20px rgba(0,0,0,0.3);
+
+    --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
+    --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px;
+    --space-3xl: 64px; --space-4xl: 80px; --space-5xl: 100px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-primary); background: var(--bg); color: var(--text);
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+
+  .browser-chrome { background: #2A2623; border-radius: 10px 10px 0 0; padding: 10px var(--space-md); display: flex; align-items: center; gap: 10px; }
+  .browser-chrome .dots { display: flex; gap: 7px; }
+  .browser-chrome .dots span { width: 12px; height: 12px; border-radius: 50%; }
+  .browser-chrome .dots span:nth-child(1) { background: #FF5F57; }
+  .browser-chrome .dots span:nth-child(2) { background: #FFBD2E; }
+  .browser-chrome .dots span:nth-child(3) { background: #28C840; }
+  .browser-chrome .url-bar { flex: 1; background: #1A1614; border-radius: 6px; padding: 6px 14px; font-size: 13px; color: #8A7A6E; font-family: var(--font-primary); border: 1px solid rgba(255,255,255,0.06); }
+  .mockup-label { position: fixed; top: 4px; right: 16px; z-index: 200; background: var(--primary); color: #FFF; padding: 4px 14px; border-radius: 0 0 8px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-lg) var(--space-3xl); max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+  .nav-logo { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
+  .nav-logo span { color: var(--primary); }
+  .nav-links { display: flex; gap: var(--space-xl); list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--primary); color: #FFF !important; padding: 10px 24px; border-radius: var(--radius-full); font-weight: 600; box-shadow: var(--shadow-glow); transition: all 0.2s; }
+  .nav-cta:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+  .hero { display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; min-height: 80vh; padding: var(--space-3xl) var(--space-3xl); gap: var(--space-3xl); align-items: center; position: relative; }
+  .hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(199,62,43,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-content .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--amber-dim); color: var(--amber); padding: 6px 18px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: var(--space-lg); border: 1px solid rgba(212,165,74,0.15); }
+  .hero-content h1 { font-size: 60px; font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; margin-bottom: var(--space-md); }
+  .hero-content h1 span { color: var(--primary); }
+  .hero-content p { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 440px; margin-bottom: var(--space-xl); }
+  .hero-actions { display: flex; gap: var(--space-md); align-items: center; }
+  .btn-primary { background: var(--primary); color: #FFF; padding: 14px 32px; border-radius: var(--radius-full); text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.2s; display: inline-flex; align-items: center; gap: var(--space-sm); box-shadow: var(--shadow-glow); }
+  .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+  .btn-secondary { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 15px; padding-bottom: 2px; transition: color 0.2s; }
+  .btn-secondary:hover { color: var(--text); }
+  .hero-visual { border-radius: var(--radius-lg); height: 500px; background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&h=500&fit=crop'); background-size: cover; background-position: center; box-shadow: var(--shadow-card); position: relative; }
+  .hero-visual::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(26,22,20,0.4) 0%, transparent 50%); pointer-events: none; }
+
+  section { max-width: 1200px; margin: 0 auto; padding: var(--space-5xl) var(--space-3xl); }
+  .section-label { text-align: center; text-transform: uppercase; letter-spacing: 3px; font-size: 11px; font-weight: 600; color: var(--amber); margin-bottom: var(--space-sm); }
+  section h2 { font-size: 36px; font-weight: 700; text-align: center; margin-bottom: var(--space-sm); letter-spacing: -0.5px; }
+  section .subtitle { text-align: center; color: var(--muted); font-size: 15px; max-width: 520px; margin: 0 auto var(--space-2xl); }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+  .menu-card { background: var(--surface); border-radius: var(--radius-md); padding: var(--space-lg); border: 1px solid var(--border); transition: all 0.25s; }
+  .menu-card:hover { background: var(--surface-hover); transform: translateY(-4px); border-color: rgba(199,62,43,0.2); }
+  .menu-card .price { display: inline-block; background: var(--primary); color: #FFF; padding: 2px 12px; border-radius: var(--radius-full); font-weight: 700; font-size: 14px; margin-bottom: var(--space-sm); }
+  .menu-card h3 { font-size: 16px; font-weight: 600; margin-bottom: var(--space-xs); }
+  .menu-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-sm); height: 220px; }
+  .gallery-grid > div { border-radius: var(--radius-sm); overflow: hidden; background-size: cover; background-position: center; }
+
+  .info-strip { background: var(--surface); border: 1px solid var(--border); padding: var(--space-2xl) var(--space-3xl); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); border-radius: var(--radius-lg); max-width: 1200px; margin: 0 auto; }
+  .info-item { text-align: center; }
+  .info-item h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: var(--space-xs); color: var(--amber); }
+  .info-item p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  .cta-banner { text-align: center; background: linear-gradient(135deg, var(--primary), #A83222); border-radius: var(--radius-lg); padding: var(--space-3xl) var(--space-2xl); max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden; }
+  .cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(212,165,74,0.1) 0%, transparent 60%); }
+  .cta-banner h2 { font-size: 36px; font-weight: 700; color: #FFF; margin-bottom: var(--space-sm); position: relative; }
+  .cta-banner p { color: rgba(255,255,255,0.7); margin-bottom: var(--space-xl); font-size: 15px; position: relative; }
+  .cta-banner .btn-primary { background: #FFF; color: var(--primary); font-weight: 700; box-shadow: none; }
+  .cta-banner .btn-primary:hover { background: var(--amber); color: var(--bg); }
+
+  .footer { text-align: center; padding: var(--space-xl) var(--space-3xl); color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: var(--space-3xl); }
+
+  @media (max-width: 768px) {
+    .nav { flex-direction: column; gap: var(--space-md); padding: var(--space-md) var(--space-lg); }
+    .hero { grid-template-columns: 1fr; padding: var(--space-xl) var(--space-lg); min-height: auto; }
+    .hero-content h1 { font-size: 36px; }
+    .hero-visual { height: 260px; }
+    section { padding: var(--space-2xl) var(--space-lg); }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); height: 140px; }
+    .info-strip { grid-template-columns: 1fr; }
+    .cta-banner { padding: var(--space-2xl) var(--space-lg); }
+  }
+</style>
+</head>
+<body>
+<div class="mockup-label">MOCKUP — Proposed Redesign</div>
+<div class="browser-chrome">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="url-bar">https://stoutburgershollywood.com</div>
+</div>
+
+<nav class="nav">
+  <div class="nav-logo">STOUT<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Location</a></li>
+    <li><a href="#" class="nav-cta">Order Online</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="badge">● Now Open on Cahuenga Blvd</span>
+    <h1>Serious <span>Burgers.</span><br>Serious Beers.</h1>
+    <p>Hollywood's destination for craft burgers, local brews, and the kind of atmosphere that turns a meal into a night out.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">View Full Menu →</a>
+      <a href="#" class="btn-secondary">Order Takeout</a>
+    </div>
+  </div>
+  <div class="hero-visual" role="img" aria-label="Craft burger"></div>
+</section>
+
+<section>
+  <div class="section-label">From the Kitchen</div>
+  <h2>Burgers & Brews</h2>
+  <p class="subtitle">Handcrafted with premium ingredients. Served with a side of Hollywood attitude.</p>
+  <div class="menu-grid">
+    <div class="menu-card"><span class="price">$16</span><h3>The Classic Stout</h3><p>Double smash patty, American cheese, pickles, onions, special sauce on a toasted brioche bun.</p></div>
+    <div class="menu-card"><span class="price">$18</span><h3>Hollywood Heat</h3><p>Crispy chicken, pepper jack, jalapenos, chipotle aioli, avocado, cilantro lime slaw.</p></div>
+    <div class="menu-card"><span class="price">$20</span><h3>The Cahuenga</h3><p>Wagyu blend, truffle aioli, caramelized onions, arugula, aged cheddar, hand-cut garlic fries.</p></div>
+    <div class="menu-card"><span class="price">$9</span><h3>Local IPA Flight</h3><p>Four rotating taps from LA's best breweries. Ask your server what's pouring today.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">The Vibe</div>
+  <h2>Insta-worthy</h2>
+  <p class="subtitle">Good food. Good people. Good times.</p>
+  <div class="gallery-grid">
+    <div style="background-image:url('https://images.unsplash.com/photo-1550547660-d9450f859349?w=300&h=220&fit=crop')"></div>
+    <div style="background-image:url('https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=300&h=220&fit=crop')"></div>
+    <div style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&h=220&fit=crop')"></div>
+    <div style="background-image:url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=300&h=220&fit=crop')"></div>
+  </div>
+</section>
+
+<div class="info-strip">
+  <div class="info-item"><h3>Location</h3><p>1544 N Cahuenga Blvd<br>Los Angeles, CA 90028</p></div>
+  <div class="info-item"><h3>Hours</h3><p>Mon–Thu: 11:30am – 10pm<br>Fri–Sat: 11:30am – 11pm<br>Sun: 11am – 9pm</p></div>
+  <div class="info-item"><h3>Contact</h3><p>(323) 469-3801<br>info@stoutburgersandbeers.com</p></div>
+</div>
+
+<section>
+  <div class="cta-banner">
+    <h2>Ready to eat?</h2>
+    <p>Skip the line. Order online for pickup or delivery.</p>
+    <a href="#" class="btn-primary">Order Online Now</a>
+  </div>
+</section>
+
+<footer class="footer">&copy; 2026 STOUT Burgers & Beers — Hollywood. All rights reserved.</footer>
+</body>
+</html>
