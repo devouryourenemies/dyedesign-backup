@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saint Felix Hollywood — Cocktail Lounge Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0b10;
+  color: #d4d0c8;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== BROWSER CHROME ===== */
+.mockup-container {
+  max-width: 1280px;
+  margin: 24px auto;
+  background: #1a1c23;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.08);
+  position: relative;
+}
+.browser-chrome {
+  background: #2c2e36;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #3a3c46;
+  position: relative;
+}
+.mac-dots {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.mac-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+.mac-dot.red { background: #ff5f57; }
+.mac-dot.yellow { background: #ffbd2e; }
+.mac-dot.green { background: #27c93f; }
+.browser-url {
+  flex: 1;
+  background: #1e1f26;
+  color: #888;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  letter-spacing: 0.3px;
+  user-select: none;
+}
+.mockup-badge {
+  position: absolute;
+  top: -8px;
+  right: 32px;
+  background: linear-gradient(135deg, #c9a84c, #d4af37);
+  color: #0a0b10;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 4px;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0b10; }
+::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: #ede7d9;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.section-subtitle {
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #d4af37;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 0 auto 40px;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  background: linear-gradient(180deg, #0a0b10 0%, rgba(10,11,16,0.92) 100%);
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ede7d9;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.logo span { color: #d4af37; }
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+.nav-links a {
+  color: #b0aca0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: #d4af37; }
+.nav-cta {
+  background: transparent;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  padding: 8px 22px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-cta:hover {
+  background: #d4af37;
+  color: #0a0b10;
+}
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: #ede7d9; border-radius: 2px; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(10,25,47,0.5) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0b10 0%, #0f1119 40%, #11131e 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0px, transparent 120px, rgba(212,175,55,0.015) 120px, rgba(212,175,55,0.015) 121px),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 120px, rgba(212,175,55,0.015) 120px, rgba(212,175,55,0.015) 121px);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 820px; }
+.hero-tag {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #d4af37;
+  border: 1px solid rgba(212,175,55,0.25);
+  padding: 6px 18px;
+  border-radius: 3px;
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+.hero h1 {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #ede7d9 0%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #9e9a8e;
+  max-width: 580px;
+  margin: 0 auto 40px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: #d4af37;
+  color: #0a0b10;
+  border: none;
+  padding: 14px 36px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: #e8c44a; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,175,55,0.3); }
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(212,175,55,0.4);
+  color: #ede7d9;
+  padding: 14px 36px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-outline:hover { border-color: #d4af37; color: #d4af37; }
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #5a5a5a;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: float 2.5s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+.hero-scroll-indicator .arrow { width: 1px; height: 24px; background: linear-gradient(180deg, #d4af37, transparent); }
+
+/* ===== SECTION COMMON ===== */
+section { padding: 80px 48px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+/* ===== COCKTAILS ===== */
+.cocktails {
+  background: linear-gradient(180deg, #0f1119 0%, #12141e 100%);
+  position: relative;
+}
+.cocktails::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent);
+}
+.cocktail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+.cocktail-card {
+  background: linear-gradient(145deg, rgba(26,28,35,0.8), rgba(18,20,30,0.9));
+  border: 1px solid rgba(212,175,55,0.08);
+  border-radius: 12px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.cocktail-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.cocktail-card:hover::after { opacity: 1; }
+.cocktail-card:hover {
+  border-color: rgba(212,175,55,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.cocktail-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+.cocktail-card h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #ede7d9;
+}
+.cocktail-card .price {
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.cocktail-card p {
+  color: #9e9a8e;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ===== EVENTS ===== */
+.events {
+  background: #0a0b10;
+  position: relative;
+}
+.events::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent);
+}
+.event-list { display: flex; flex-direction: column; gap: 24px; }
+.event-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 20px 28px;
+  background: rgba(26,28,35,0.4);
+  border: 1px solid rgba(212,175,55,0.06);
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+.event-item:hover {
+  border-color: rgba(212,175,55,0.15);
+  background: rgba(26,28,35,0.7);
+}
+.event-date {
+  text-align: center;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+.event-date .day {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #d4af37;
+  line-height: 1;
+  display: block;
+}
+.event-date .month {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+}
+.event-info { flex: 1; }
+.event-info h4 {
+  font-size: 18px;
+  color: #ede7d9;
+  margin-bottom: 4px;
+}
+.event-info p {
+  color: #9e9a8e;
+  font-size: 13px;
+}
+.event-info .event-time {
+  font-size: 12px;
+  color: #d4af37;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.event-tag {
+  background: rgba(212,175,55,0.1);
+  color: #d4af37;
+  font-size: 11px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ===== INFO STRIP ===== */
+.info-strip {
+  background: linear-gradient(135deg, #11131e 0%, #161824 100%);
+  border-top: 1px solid rgba(212,175,55,0.1);
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+  padding: 60px 48px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.info-item h4 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #d4af37;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.info-item p {
+  color: #b0aca0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.info-item .label-value {
+  color: #9e9a8e;
+  font-size: 13px;
+}
+.info-item a {
+  color: #d4af37;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.info-item a:hover { color: #e8c44a; }
+
+/* ===== CTA BANNER ===== */
+.cta-banner {
+  background: linear-gradient(135deg, #0f1119 0%, #1a1c23 100%);
+  padding: 72px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-banner h2 {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  margin-bottom: 16px;
+}
+.cta-banner p {
+  color: #9e9a8e;
+  max-width: 600px;
+  margin: 0 auto 32px;
+  font-size: 15px;
+}
+.cta-dead-website {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,95,87,0.08);
+  border: 1px solid rgba(255,95,87,0.2);
+  padding: 10px 24px;
+  border-radius: 6px;
+  margin-bottom: 28px;
+}
+.cta-dead-website span {
+  color: #ff5f57;
+  font-size: 13px;
+  font-weight: 500;
+}
+.cta-dead-website .dead-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ff5f57;
+  border-radius: 50%;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #07080c;
+  padding: 32px 48px;
+  text-align: center;
+  border-top: 1px solid rgba(212,175,55,0.06);
+}
+footer p {
+  color: #5a5a5a;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+footer strong {
+  color: #b0aca0;
+  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+}
+.dye-credit {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #4a4a4a;
+  letter-spacing: 1.5px;
+}
+.dye-credit span {
+  color: #d4af37;
+  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 48px 24px; }
+  .hero { min-height: 70vh; padding: 60px 24px; }
+  .event-item { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+  .event-date { display: flex; gap: 6px; align-items: baseline; justify-content: center; }
+  .event-date .day { font-size: 22px; }
+  .info-strip { padding: 40px 24px; }
+  .cta-banner { padding: 48px 24px; }
+  footer { padding: 24px; }
+  .mockup-container { margin: 12px; border-radius: 12px; }
+  .browser-chrome { padding: 10px 14px; }
+  .browser-url { font-size: 11px; padding: 5px 10px; }
+  .mockup-badge { right: 16px; top: -6px; font-size: 9px; padding: 3px 10px; }
+}
+@media (max-width: 480px) {
+  .cocktail-grid { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mockup-container">
+
+  <!-- macOS Browser Chrome -->
+  <div class="browser-chrome">
+    <div class="mac-dots">
+      <span class="mac-dot red"></span>
+      <span class="mac-dot yellow"></span>
+      <span class="mac-dot green"></span>
+    </div>
+    <div class="browser-url">saintfelixhollywood.com</div>
+    <div class="mockup-badge">Mockup &bull; DYE Design</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Saint<span>Felix</span></div>
+    <ul class="nav-links">
+      <li><a href="#cocktails">Cocktails</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#info">Info</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Reserve</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-tag">Est. 2019 &bull; Hollywood, CA</div>
+      <h1>Hollywood's Hidden Cocktail Lounge</h1>
+      <p>An intimate retreat where masterfully crafted cocktails meet Art Deco elegance. Behind an unmarked door on the boulevard, Saint Felix awaits.</p>
+      <div class="hero-btns">
+        <button class="btn-primary">Explore the Menu</button>
+        <button class="btn-outline">Make a Reservation</button>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- Signature Cocktails -->
+  <section class="cocktails" id="cocktails">
+    <div class="section-inner">
+      <div class="section-subtitle">Signature Libations</div>
+      <h2>Our Cocktails</h2>
+      <div class="section-divider"></div>
+      <div class="cocktail-grid">
+        <div class="cocktail-card">
+          <span class="cocktail-icon">🥃</span>
+          <h3>The Felix Old Fashioned</h3>
+          <div class="price">$18</div>
+          <p>Bourbon, angostura bitters, demerara, orange zest — a timeless classic with a whisper of smoked maple.</p>
+        </div>
+        <div class="cocktail-card">
+          <span class="cocktail-icon">🍸</span>
+          <h3>Boulevard of Dreams</h3>
+          <div class="price">$20</div>
+          <p>London dry gin, Lillet Blanc, Cocchi Americano, lemon twist — a Hollywood twist on the perfect martini.</p>
+        </div>
+        <div class="cocktail-card">
+          <span class="cocktail-icon">🍷</span>
+          <h3>Velvet Noir</h3>
+          <div class="price">$19</div>
+          <p>Reposado tequila, crème de cassis, black lime, thyme — dark, herbal, and impossibly smooth.</p>
+        </div>
+        <div class="cocktail-card">
+          <span class="cocktail-icon">🍹</span>
+          <h3>Neon Palms</h3>
+          <div class="price">$17</div>
+          <p>Rhum agricole, pineapple gomme, lime, orgeat, Angostura float — tropical noir served in a coupe.</p>
+        </div>
+        <div class="cocktail-card">
+          <span class="cocktail-icon">🥂</span>
+          <h3>Golden Hour Spritz</h3>
+          <div class="price">$16</div>
+          <p>Aperol, St-Germain, prosecco, soda, grapefruit — effervescent, sun-drenched, dangerously drinkable.</p>
+        </div>
+        <div class="cocktail-card">
+          <span class="cocktail-icon">🍾</span>
+          <h3>The Libertine</h3>
+          <div class="price">$22</div>
+          <p>Irish whiskey, sweet vermouth, Benedictine, absinthe rinse, cherry — a decadent, smoky nightcap.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section class="events" id="events">
+    <div class="section-inner">
+      <div class="section-subtitle">What's On</div>
+      <h2>Upcoming Events</h2>
+      <div class="section-divider"></div>
+      <div class="event-list">
+        <div class="event-item">
+          <div class="event-date"><span class="day">05</span><span class="month">Jun</span></div>
+          <div class="event-info">
+            <h4>Barrel Proof &mdash; Bourbon Night</h4>
+            <p>A curated tasting of rare barrel-proof bourbons with guest distiller.</p>
+            <div class="event-time">8:00 PM &bull; $65/person</div>
+          </div>
+          <div class="event-tag">Tasting</div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><span class="day">12</span><span class="month">Jun</span></div>
+          <div class="event-info">
+            <h4>Jazz &amp; Juleps</h4>
+            <p>Live jazz trio + our twist on the classic mint julep. Sip, sway, repeat.</p>
+            <div class="event-time">9:00 PM &bull; No cover</div>
+          </div>
+          <div class="event-tag">Live Music</div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><span class="day">19</span><span class="month">Jun</span></div>
+          <div class="event-info">
+            <h4>Art of the Aperitivo</h4>
+            <p>An evening of Italian-style aperitivi, small bites, and bitter-sweet pairings.</p>
+            <div class="event-time">7:00 PM &bull; $45/person</div>
+          </div>
+          <div class="event-tag">Special</div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><span class="day">26</span><span class="month">Jun</span></div>
+          <div class="event-info">
+            <h4>Speakeasy Cinema: Casablanca</h4>
+            <p>Classic film screening with a themed cocktail in hand. Seating is limited.</p>
+            <div class="event-time">8:30 PM &bull; Free entry</div>
+          </div>
+          <div class="event-tag">Film</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Strip -->
+  <section class="info-strip" id="info">
+    <div class="info-grid">
+      <div class="info-item">
+        <h4>Location</h4>
+        <p>1615 N Cahuenga Blvd<br>Hollywood, CA 90028</p>
+        <p class="label-value" style="margin-top:6px;">Behind the unmarked black door</p>
+      </div>
+      <div class="info-item">
+        <h4>Hours</h4>
+        <p>Mon–Wed &bull; 6 PM – 1 AM<br>Thu–Sat &bull; 6 PM – 2 AM<br>Sunday &bull; Closed</p>
+      </div>
+      <div class="info-item" id="contact">
+        <h4>Contact</h4>
+        <p><a href="mailto:saintfelix.libertine@gmail.com">saintfelix.libertine@gmail.com</a></p>
+        <p style="margin-top:6px;">Private events &amp; buyouts available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner - Dead Website -->
+  <section class="cta-banner">
+    <h2>A Digital Resurrection</h2>
+    <p>Saint Felix once had a website — but it's gone dark. No domain resolves, no archive answers. This mockup is a glimpse of what could be: a handcrafted digital presence worthy of the cocktails.</p>
+    <div class="cta-dead-website">
+      <span class="dead-icon"></span>
+      <span>saintfelixhollywood.com — DEAD (no HTTP response)</span>
+    </div>
+    <br>
+    <button class="btn-primary">Let's Bring It Back &rarr;</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Saint Felix &bull; Hollywood, California</p>
+    <div class="dye-credit">Mockup by <span>DYE Design</span> &bull; All rights reserved &copy; 2025</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

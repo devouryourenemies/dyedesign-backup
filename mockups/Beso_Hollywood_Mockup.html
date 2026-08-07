@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beso Hollywood</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1a1410;
+            color: #f0e8dc;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-weight: 700;
+        }
+        a { color: #d4a853; text-decoration:none; transition:color .25s; }
+        a:hover { color: #f0d080; }
+        img { max-width:100%; display:block; }
+
+        /* ── Browser Chrome ── */
+        .browser-chrome {
+            width:100%;
+            background: #2d231e;
+            border-bottom:2px solid #4a3828;
+            padding:10px 16px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            user-select:none;
+            position:sticky;
+            top:0;
+            z-index:100;
+            flex-wrap:wrap;
+        }
+        .browser-dots { display:flex; gap:7px; }
+        .browser-dots span {
+            width:13px; height:13px; border-radius:50%;
+            display:inline-block;
+        }
+        .browser-dots .red    { background:#ff5f56; }
+        .browser-dots .yellow { background:#ffbd2e; }
+        .browser-dots .green  { background:#27c93f; }
+        .browser-address {
+            flex:1; min-width:200px;
+            background:#1a1410;
+            border:1px solid #4a3828;
+            border-radius:6px;
+            padding:6px 14px;
+            font-size:13px;
+            color:#b8a898;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            font-family: 'Inter', monospace;
+        }
+        .browser-address .lock { color:#6a9e5a; font-size:14px; }
+        .browser-address .url  { color:#b8a898; }
+        .browser-address .url code { color:#d4a853; }
+        .browser-address .badge {
+            margin-left:auto;
+            background:#5a2a1a;
+            color:#ff7a4a;
+            font-size:10px;
+            font-weight:600;
+            padding:2px 8px;
+            border-radius:4px;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+
+        /* ── Nav ── */
+        nav {
+            background: rgba(26,20,16,.95);
+            backdrop-filter: blur(8px);
+            padding:16px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-bottom:1px solid rgba(212,168,83,.15);
+            position:sticky;
+            top:41px;
+            z-index:99;
+        }
+        nav .logo {
+            font-family:'Playfair Display', serif;
+            font-size:22px;
+            font-weight:700;
+            letter-spacing:2px;
+            color:#d4a853;
+            text-transform:uppercase;
+        }
+        nav .logo span { color:#f0e8dc; }
+        nav .nav-links { display:flex; gap:28px; list-style:none; }
+        nav .nav-links a {
+            font-size:14px;
+            font-weight:500;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            color:#c0b0a0;
+            position:relative;
+        }
+        nav .nav-links a::after {
+            content:'';
+            position:absolute;
+            bottom:-4px; left:0;
+            width:0; height:2px;
+            background:#d4a853;
+            transition:width .3s;
+        }
+        nav .nav-links a:hover::after { width:100%; }
+        nav .nav-links a:hover { color:#d4a853; }
+        .nav-toggle { display:none; flex-direction:column; gap:4px; cursor:pointer; }
+        .nav-toggle span { width:26px; height:2px; background:#d4a853; border-radius:2px; }
+
+        /* ── Hero ── */
+        .hero {
+            position:relative;
+            min-height:80vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            background:
+                linear-gradient(135deg, rgba(26,20,16,.85) 0%, rgba(60,35,25,.75) 50%, rgba(26,20,16,.85) 100%),
+                radial-gradient(ellipse at 30% 40%, #7a3a1a 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, #3a2010 0%, transparent 50%);
+            overflow:hidden;
+            padding:80px 30px;
+        }
+        .hero::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a853' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events:none;
+        }
+        .hero-content { position:relative; z-index:1; max-width:900px; }
+        .hero-content .sub-label {
+            font-size:13px;
+            letter-spacing:4px;
+            text-transform:uppercase;
+            color:#d4a853;
+            margin-bottom:16px;
+            font-weight:500;
+        }
+        .hero-content h1 {
+            font-size:clamp(3.2rem, 10vw, 6.5rem);
+            font-weight:700;
+            letter-spacing:4px;
+            color:#d4a853;
+            text-shadow:0 4px 30px rgba(0,0,0,.4);
+            line-height:1.1;
+        }
+        .hero-content h1 span {
+            display:block;
+            font-size:clamp(1rem, 3vw, 1.6rem);
+            font-family:'Inter', sans-serif;
+            font-weight:300;
+            letter-spacing:6px;
+            color:#c0b0a0;
+            margin-top:10px;
+            text-transform:uppercase;
+        }
+        .hero-content .tagline {
+            font-size:clamp(1.1rem, 2vw, 1.4rem);
+            font-weight:300;
+            color:#d8c8b8;
+            margin:30px auto 40px;
+            max-width:600px;
+            font-style:italic;
+            font-family:'Playfair Display', serif;
+        }
+        .hero-content .address-line {
+            font-size:15px;
+            color:#b8a898;
+            letter-spacing:1px;
+        }
+        .hero-content .address-line i { color:#d4a853; }
+        .btn {
+            display:inline-block;
+            padding:14px 36px;
+            border:2px solid #d4a853;
+            background:transparent;
+            color:#d4a853;
+            font-family:'Inter', sans-serif;
+            font-size:14px;
+            font-weight:600;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            border-radius:0;
+            transition:all .3s;
+            cursor:pointer;
+        }
+        .btn:hover {
+            background:#d4a853;
+            color:#1a1410;
+        }
+        .btn-outline-light {
+            border-color:rgba(240,232,220,.3);
+            color:#f0e8dc;
+        }
+        .btn-outline-light:hover {
+            background:rgba(240,232,220,.1);
+            border-color:#f0e8dc;
+        }
+        .hero-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+        /* ── Section common ── */
+        section { padding:80px 40px; }
+        .section-label {
+            font-size:12px;
+            letter-spacing:4px;
+            text-transform:uppercase;
+            color:#d4a853;
+            margin-bottom:10px;
+            font-weight:600;
+        }
+        .section-title {
+            font-size:clamp(2rem, 4vw, 3rem);
+            margin-bottom:16px;
+            color:#f0e8dc;
+        }
+        .section-sub {
+            font-size:16px;
+            color:#b8a898;
+            max-width:600px;
+            margin-bottom:50px;
+            font-weight:300;
+        }
+        .container { max-width:1200px; margin:0 auto; }
+
+        /* ── Menu Preview ── */
+        .menu-preview {
+            background: #201814;
+        }
+        .menu-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+            gap:30px;
+        }
+        .menu-card {
+            background:rgba(255,255,255,.03);
+            border:1px solid rgba(212,168,83,.1);
+            padding:32px;
+            transition:all .3s;
+            position:relative;
+        }
+        .menu-card:hover {
+            border-color:rgba(212,168,83,.3);
+            transform:translateY(-3px);
+            background:rgba(255,255,255,.05);
+        }
+        .menu-card .icon { font-size:32px; margin-bottom:12px; }
+        .menu-card h3 {
+            font-size:20px;
+            color:#d4a853;
+            margin-bottom:8px;
+        }
+        .menu-card .price { color:#d4a853; font-weight:600; font-size:18px; }
+        .menu-card .desc { color:#b8a898; font-size:14px; margin-top:6px; }
+        .menu-card .ingredients {
+            color:#8a7a6a;
+            font-size:13px;
+            margin-top:4px;
+            font-style:italic;
+        }
+
+        /* ── Gallery ── */
+        .gallery {
+            background:#1a1410;
+        }
+        .gallery-grid {
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:12px;
+        }
+        .gallery-grid .g-item {
+            aspect-ratio:1/1;
+            background: linear-gradient(135deg, #2d231e, #4a3828);
+            border:1px solid rgba(212,168,83,.08);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:13px;
+            color:#8a7a6a;
+            text-align:center;
+            padding:20px;
+            position:relative;
+            overflow:hidden;
+            transition:all .3s;
+        }
+        .gallery-grid .g-item:hover {
+            border-color:rgba(212,168,83,.25);
+            transform:scale(1.02);
+            z-index:2;
+        }
+        .gallery-grid .g-item .placeholder-icon {
+            font-size:48px;
+            opacity:.3;
+            margin-bottom:8px;
+        }
+        .gallery-grid .g-item .placeholder-label {
+            font-size:11px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+        .gallery-grid .g-item:nth-child(1) { grid-column:span 2; grid-row:span 2; }
+
+        /* ── Info / 403 Strip ── */
+        .info-strip {
+            background: #2d231e;
+            border-top:1px solid rgba(212,168,83,.1);
+            border-bottom:1px solid rgba(212,168,83,.1);
+        }
+        .info-strip .info-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+            gap:40px;
+            text-align:center;
+        }
+        .info-strip .info-item h4 {
+            color:#d4a853;
+            font-size:15px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            margin-bottom:8px;
+        }
+        .info-strip .info-item p {
+            color:#b8a898;
+            font-size:14px;
+        }
+        .info-strip .info-item a { color:#d4a853; }
+        .info-strip .info-item a:hover { color:#f0d080; }
+
+        /* ── 403 CTA ── */
+        .cta-403 {
+            background:
+                linear-gradient(135deg, #2a1a10 0%, #3a2215 50%, #2a1a10 100%);
+            text-align:center;
+            border-top:2px solid rgba(212,168,83,.15);
+        }
+        .cta-403 h2 { font-size:clamp(1.6rem,3vw,2.4rem); }
+        .cta-403 .error-code {
+            display:inline-block;
+            background:rgba(255,90,50,.15);
+            color:#ff5a32;
+            font-size:13px;
+            font-weight:600;
+            padding:4px 16px;
+            border-radius:4px;
+            letter-spacing:1px;
+            margin-bottom:16px;
+            font-family:'Inter', monospace;
+        }
+        .cta-403 .status-note {
+            background:rgba(212,168,83,.06);
+            border:1px solid rgba(212,168,83,.15);
+            padding:20px 28px;
+            max-width:600px;
+            margin:28px auto 0;
+            border-radius:4px;
+        }
+        .cta-403 .status-note p {
+            font-size:14px;
+            color:#b8a898;
+        }
+        .cta-403 .status-note strong { color:#d4a853; }
+
+        /* ── Footer ── */
+        footer {
+            background:#14100c;
+            padding:40px;
+            text-align:center;
+            border-top:1px solid rgba(212,168,83,.08);
+        }
+        footer .footer-logo {
+            font-family:'Playfair Display', serif;
+            font-size:18px;
+            color:#d4a853;
+            letter-spacing:3px;
+            margin-bottom:6px;
+        }
+        footer p {
+            color:#6a5a4a;
+            font-size:13px;
+            letter-spacing:1px;
+        }
+        footer .dye {
+            color:#d4a853;
+            font-weight:600;
+        }
+        footer .socials { display:flex; gap:20px; justify-content:center; margin-bottom:16px; }
+        footer .socials a {
+            color:#6a5a4a;
+            font-size:14px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+        footer .socials a:hover { color:#d4a853; }
+
+        /* ── Responsive ── */
+        @media (max-width:900px) {
+            nav { padding:14px 24px; }
+            .gallery-grid { grid-template-columns:repeat(2,1fr); }
+            .gallery-grid .g-item:nth-child(1) { grid-column:span 2; grid-row:span 1; }
+        }
+        @media (max-width:700px) {
+            nav .nav-links { display:none; }
+            .nav-toggle { display:flex; }
+            section { padding:50px 24px; }
+            .hero { min-height:60vh; padding:60px 20px; }
+            .hero-content h1 { font-size:clamp(2.4rem,12vw,3.6rem); }
+            .menu-grid { grid-template-columns:1fr; }
+            .gallery-grid { grid-template-columns:1fr 1fr; gap:8px; }
+            .gallery-grid .g-item:nth-child(1) { grid-column:span 2; }
+            .info-strip .info-grid { gap:24px; }
+        }
+        @media (max-width:480px) {
+            .browser-chrome { padding:8px 12px; gap:8px; }
+            .browser-address { font-size:11px; padding:4px 10px; min-width:120px; }
+            .browser-dots span { width:10px; height:10px; }
+            .hero-actions { flex-direction:column; align-items:center; }
+            .gallery-grid { grid-template-columns:1fr; }
+            .gallery-grid .g-item:nth-child(1) { grid-column:span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ BROWSER CHROME ═══════ -->
+<div class="browser-chrome">
+    <div class="browser-dots">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+    </div>
+    <div class="browser-address">
+        <span class="lock">&#128274;</span>
+        <span class="url"><code>besohollywood.com</code></span>
+        <span class="badge">403 Forbidden</span>
+    </div>
+</div>
+
+<!-- ═══════ NAVIGATION ═══════ -->
+<nav>
+    <div class="logo">Beso<span> Hollywood</span></div>
+    <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#info">Info</a></li>
+        <li><a href="#reservations" class="btn" style="padding:8px 20px;">Reservations</a></li>
+    </ul>
+    <div class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="top">
+    <div class="hero-content">
+        <div class="sub-label">Welcome to</div>
+        <h1>
+            BESO
+            <span>Hollywood</span>
+        </h1>
+        <p class="tagline">Latin-inspired cuisine with the soul of Los Angeles</p>
+        <p class="address-line">
+            <i>&#9901;</i> 6350 Hollywood Blvd &nbsp;·&nbsp; Los Angeles, CA 90028
+        </p>
+        <div style="height:30px;"></div>
+        <div class="hero-actions">
+            <a href="#menu" class="btn">Explore Menu</a>
+            <a href="#info" class="btn btn-outline-light">Visit Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ MENU PREVIEW ═══════ -->
+<section class="menu-preview" id="menu">
+    <div class="container">
+        <p class="section-label">Curated Flavors</p>
+        <h2 class="section-title">Menu Preview</h2>
+        <p class="section-sub">A taste of what Beso brings to the Hollywood table — Latin traditions reimagined with California's finest ingredients.</p>
+
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="icon">&#127829;</div>
+                <h3>Empanada de Carne</h3>
+                <div class="price">$16</div>
+                <p class="desc">Hand-folded beef empanada with chimichurri & smoked paprika aioli</p>
+                <p class="ingredients">Wagyu beef · olives · sofrito</p>
+            </div>
+            <div class="menu-card">
+                <div class="icon">&#127828;</div>
+                <h3>Beso Burger</h3>
+                <div class="price">$22</div>
+                <p class="desc">Dry-aged patty, manchego, caramelized onions, truffle fries</p>
+                <p class="ingredients">Prime beef · manchego · arugula</p>
+            </div>
+            <div class="menu-card">
+                <div class="icon">&#127860;</div>
+                <h3>Pulpo a la Plancha</h3>
+                <div class="price">$26</div>
+                <p class="desc">Charted octopus with salsa verde, fingerling potatoes & pickled shallots</p>
+                <p class="ingredients">Spanish octopus · salsa verde · citrus</p>
+            </div>
+            <div class="menu-card">
+                <div class="icon">&#127864;</div>
+                <h3>Passion Fruit Margarita</h3>
+                <div class="price">$17</div>
+                <p class="desc">Milagro blanco, passion fruit, lime, agave, tajín rim</p>
+                <p class="ingredients">Milagro · fresh passion fruit · agave</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ GALLERY ═══════ -->
+<section class="gallery" id="gallery">
+    <div class="container">
+        <p class="section-label">Moments</p>
+        <h2 class="section-title">Gallery</h2>
+        <p class="section-sub">The ambience, the dishes, the energy — Beso Hollywood in frames.</p>
+
+        <div class="gallery-grid">
+            <div class="g-item">
+                <div>
+                    <div class="placeholder-icon">&#127860;</div>
+                    <div class="placeholder-label">Interior Dining</div>
+                </div>
+            </div>
+            <div class="g-item">
+                <div>
+                    <div class="placeholder-icon">&#127864;</div>
+                    <div class="placeholder-label">Bar & Cocktails</div>
+                </div>
+            </div>
+            <div class="g-item">
+                <div>
+                    <div class="placeholder-icon">&#127858;</div>
+                    <div class="placeholder-label">Signature Plates</div>
+                </div>
+            </div>
+            <div class="g-item">
+                <div>
+                    <div class="placeholder-icon">&#127917;</div>
+                    <div class="placeholder-label">Private Events</div>
+                </div>
+            </div>
+            <div class="g-item">
+                <div>
+                    <div class="placeholder-icon">&#127911;</div>
+                    <div class="placeholder-label">Live Music</div>
+                </div>
+            </div>
+            <div class="g-item">
+                <div>
+                    <div class="placeholder-icon">&#127809;</div>
+                    <div class="placeholder-label">Patio</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ INFO STRIP ═══════ -->
+<section class="info-strip" id="info">
+    <div class="container">
+        <div class="info-grid">
+            <div class="info-item">
+                <h4>Location</h4>
+                <p>6350 Hollywood Blvd<br>Los Angeles, CA 90028</p>
+                <p style="margin-top:6px;font-size:12px;color:#6a5a4a;">Historic Hollywood Boulevard</p>
+            </div>
+            <div class="info-item">
+                <h4>Hours</h4>
+                <p>Mon–Thu &nbsp; 5:00pm – 10:00pm<br>Fri–Sat &nbsp; 5:00pm – 12:00am<br>Sunday &nbsp; 11:00am – 9:00pm</p>
+            </div>
+            <div class="info-item">
+                <h4>Contact</h4>
+                <p><a href="mailto:info@besohollywood.com">info@besohollywood.com</a><br>
+                <span style="color:#6a5a4a;">(323) 555-0178</span></p>
+            </div>
+            <div class="info-item">
+                <h4>Notes</h4>
+                <p>Formerly Todd English &amp; Eva Longoria's restaurant.<br>
+                <span style="font-size:12px;color:#6a5a4a;">Valet parking · Coat check · Wheelchair accessible</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ 403 CTA ═══════ -->
+<section class="cta-403" id="reservations">
+    <div class="container">
+        <div class="error-code">&#9888; HTTP 403 Forbidden</div>
+        <h2 class="section-title" style="margin-bottom:8px;">Having trouble reaching the site?</h2>
+        <p style="color:#b8a898;max-width:560px;margin:0 auto 10px;">
+            The official Beso Hollywood website is currently returning a <strong style="color:#d4a853;">403 Forbidden</strong>
+            error. It looks like the domain may be offline, restricted, or the restaurant may have closed or rebranded.
+        </p>
+        <div class="status-note">
+            <p>
+                <strong>Need to get in touch?</strong> Reach out directly via email at
+                <a href="mailto:info@besohollywood.com">info@besohollywood.com</a>
+                for inquiries, private events, or updated information.
+            </p>
+        </div>
+        <div style="margin-top:30px;">
+            <a href="mailto:info@besohollywood.com" class="btn">Email Beso</a>
+        </div>
+        <p style="margin-top:20px;font-size:12px;color:#6a5a4a;">
+            <em>This page is a commemorative mockup. Beso Hollywood was originally opened by Todd English and Eva Longoria.</em>
+        </p>
+    </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+    <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Yelp</a>
+    </div>
+    <div class="footer-logo">Beso Hollywood</div>
+    <p>6350 Hollywood Blvd, Los Angeles</p>
+    <p style="margin-top:12px;">&copy; 2026 &nbsp;·&nbsp; Design by <span class="dye">DYE Design</span></p>
+</footer>
+
+</body>
+</html>

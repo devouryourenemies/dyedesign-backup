@@ -1,0 +1,50 @@
+{
+  "group_id": null,
+  "states": [
+    {
+      "character": {
+        "id": "8d26bc3e-d805-4272-8449-28b2251c5d81",
+        "name": "mecha-core",
+        "prompt": "a biomecha that looks like gurren lagann meets evangelion",
+        "size": {
+          "width": 248,
+          "height": 248
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-05-22T06:35:14.712069+00:00"
+      },
+      "folder": "mecha-core",
+      "frames": {
+        "rotations": {
+          "south": "mecha-core/rotations/south.png",
+          "south-east": "mecha-core/rotations/south-east.png",
+          "east": "mecha-core/rotations/east.png",
+          "north-east": "mecha-core/rotations/north-east.png",
+          "north": "mecha-core/rotations/north.png",
+          "north-west": "mecha-core/rotations/north-west.png",
+          "west": "mecha-core/rotations/west.png",
+          "south-west": "mecha-core/rotations/south-west.png"
+        },
+        "animations": {
+          "The_mecha_stands_still_as_the_central_portion_of_i": {
+            "south": [
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_000.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_001.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_002.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_003.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_004.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_005.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_006.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_007.png",
+              "mecha-core/animations/The_mecha_stands_still_as_the_central_portion_of_i/south/frame_008.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.0",
+  "export_date": "2026-06-13T01:17:54.054816"
+}

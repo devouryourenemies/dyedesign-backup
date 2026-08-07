@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dos Burritos — Hollywood Blvd (Light)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFBF7;
+    --surface: #FFFFFF;
+    --surface-hover: #F5F0E8;
+    --border: rgba(0,0,0,0.06);
+    --primary: #D94A3A;
+    --primary-hover: #E85A4A;
+    --green: #2ECC71;
+    --green-dim: rgba(46,204,113,0.08);
+    --gold: #F1C40F;
+    --orange: #E67E22;
+    --text: #2C2420;
+    --muted: #7A6A62;
+    --white: #FFFFFF;
+
+    --font-display: 'Archivo Black', Impact, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-full: 999px;
+
+    --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-card-hover: 0 8px 30px rgba(0,0,0,0.1);
+    --shadow-glow: 0 0 25px rgba(217,74,58,0.12);
+
+    --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
+    --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px;
+    --space-3xl: 64px; --space-4xl: 80px; --space-5xl: 100px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  .browser-chrome { background: #EDE8E1; border-radius: 10px 10px 0 0; padding: 10px var(--space-md); display: flex; align-items: center; gap: 10px; }
+  .browser-chrome .dots { display: flex; gap: 7px; }
+  .browser-chrome .dots span { width: 12px; height: 12px; border-radius: 50%; }
+  .browser-chrome .dots span:nth-child(1) { background: #FF5F57; }
+  .browser-chrome .dots span:nth-child(2) { background: #FFBD2E; }
+  .browser-chrome .dots span:nth-child(3) { background: #28C840; }
+  .browser-chrome .url-bar { flex: 1; background: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-size: 13px; color: #7A6A62; font-family: var(--font-body); border: 1px solid rgba(0,0,0,0.06); }
+  .mockup-label { position: fixed; top: 4px; right: 16px; z-index: 200; background: var(--green); color: #0E0B0A; padding: 4px 14px; border-radius: 0 0 8px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-lg) var(--space-3xl); max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.5px; color: var(--text); }
+  .nav-logo span { color: var(--green); }
+  .nav-links { display: flex; gap: var(--space-xl); list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--primary); color: #FFF !important; padding: 10px 24px; border-radius: var(--radius-full); font-weight: 600; box-shadow: var(--shadow-glow); transition: all 0.2s; }
+  .nav-cta:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+  .hero { display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; min-height: 75vh; padding: var(--space-3xl) var(--space-3xl); gap: var(--space-3xl); align-items: center; }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-content .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-dim); color: var(--green); padding: 6px 18px; border-radius: var(--radius-full); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: var(--space-lg); border: 1px solid rgba(46,204,113,0.2); }
+  .hero-content h1 { font-family: var(--font-display); font-size: 54px; line-height: 1.08; letter-spacing: -0.5px; margin-bottom: var(--space-md); }
+  .hero-content h1 span { color: var(--primary); }
+  .hero-content p { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 440px; margin-bottom: var(--space-xl); }
+  .hero-actions { display: flex; gap: var(--space-md); align-items: center; }
+  .btn-primary { background: var(--primary); color: #FFF; padding: 14px 32px; border-radius: var(--radius-full); text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.2s; display: inline-flex; align-items: center; gap: var(--space-sm); box-shadow: var(--shadow-glow); }
+  .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+  .btn-secondary { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 14px; transition: color 0.2s; border-bottom: 1px solid rgba(46,204,113,0.3); padding-bottom: 2px; }
+  .btn-secondary:hover { color: var(--green); border-color: var(--green); }
+  .hero-visual { border-radius: var(--radius-lg); height: 460px; background-image: url('https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=700&h=460&fit=crop'); background-size: cover; background-position: center; box-shadow: var(--shadow-card); }
+
+  section { max-width: 1200px; margin: 0 auto; padding: var(--space-5xl) var(--space-3xl); }
+  .section-label { text-align: center; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 600; color: var(--green); margin-bottom: var(--space-sm); }
+  section h2 { font-family: var(--font-display); font-size: 36px; text-align: center; margin-bottom: var(--space-sm); letter-spacing: -0.5px; }
+  section h2 span { color: var(--primary); }
+  section .subtitle { text-align: center; color: var(--muted); font-size: 15px; max-width: 520px; margin: 0 auto var(--space-2xl); }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+  .menu-card { background: var(--surface); border-radius: var(--radius-md); padding: var(--space-lg); border: 1px solid var(--border); box-shadow: var(--shadow-card); transition: all 0.25s; }
+  .menu-card:hover { background: var(--surface-hover); transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+  .menu-card .tag { display: inline-block; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: var(--space-xs); }
+  .menu-card .price { display: inline-block; background: var(--primary); color: #FFF; padding: 2px 12px; border-radius: var(--radius-full); font-weight: 700; font-size: 14px; margin-bottom: var(--space-sm); }
+  .menu-card h3 { font-size: 16px; font-weight: 700; margin-bottom: var(--space-xs); }
+  .menu-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .specials-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-xl); }
+  .special-card { background: var(--surface); border-radius: var(--radius-md); padding: var(--space-xl); text-align: center; border: 1px solid var(--border); box-shadow: var(--shadow-card); transition: all 0.25s; }
+  .special-card:hover { border-color: var(--primary); }
+  .special-card h3 { font-family: var(--font-display); font-size: 14px; letter-spacing: 0.5px; color: var(--primary); }
+  .special-card p { font-size: 13px; color: var(--muted); margin-top: var(--space-xs); }
+
+  .info-strip { background: var(--surface); border: 1px solid var(--border); padding: var(--space-2xl) var(--space-3xl); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); max-width: 1200px; margin: 0 auto; }
+  .info-item { text-align: center; }
+  .info-item h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: var(--space-xs); color: var(--green); }
+  .info-item p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  .cta-banner { text-align: center; background: linear-gradient(135deg, var(--primary), #C0392B); border-radius: var(--radius-lg); padding: var(--space-3xl) var(--space-2xl); max-width: 1200px; margin: 0 auto; box-shadow: var(--shadow-glow); }
+  .cta-banner h2 { font-family: var(--font-display); font-size: 38px; color: #FFF; margin-bottom: var(--space-sm); }
+  .cta-banner p { color: rgba(255,255,255,0.7); margin-bottom: var(--space-xl); font-size: 15px; }
+  .cta-banner .btn-primary { background: #FFF; color: var(--primary); font-weight: 700; box-shadow: none; }
+  .cta-banner .btn-primary:hover { background: var(--gold); color: var(--bg); }
+
+  .footer { text-align: center; padding: var(--space-xl) var(--space-3xl); color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: var(--space-3xl); }
+
+  .theme-toggle { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid rgba(46,204,113,0.2); border-radius: var(--radius-full); padding: 4px 16px 4px 12px; font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-top: var(--space-lg); }
+  .theme-toggle .pill { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 3px; }
+  .theme-toggle .pill-dark { background: #2C2420; }
+  .theme-toggle .pill-light { background: #FFFBF7; border: 1px solid #CCC; }
+
+  @media (max-width: 768px) {
+    .nav { flex-direction: column; padding: var(--space-md) var(--space-lg); }
+    .hero { grid-template-columns: 1fr; padding: var(--space-xl) var(--space-lg); }
+    .hero-content h1 { font-size: 34px; }
+    .hero-visual { height: 280px; }
+    section { padding: var(--space-2xl) var(--space-lg); }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .specials-strip { grid-template-columns: 1fr; }
+    .info-strip { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="mockup-label">LIGHT MOCKUP</div>
+<div class="browser-chrome">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="url-bar">https://dosburritosla.com</div>
+</div>
+
+<nav class="nav">
+  <div class="nav-logo">Dos <span>Burritos</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">Catering</a></li>
+    <li><a href="#">Locations</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#" class="nav-cta">Order Delivery</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="badge">● Hollywood Blvd Since 1996</span>
+    <h1>Two Burritos.<br><span>Endless</span> Possibilities.</h1>
+    <p>Hollywood's go-to spot for authentic Mexican food. Big flavors, fresh ingredients, and that salsa bar you keep dreaming about.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Order Online →</a>
+      <a href="#" class="btn-secondary">See Full Menu</a>
+    </div>
+    <div class="theme-toggle">
+      <span class="pill pill-dark"></span> Dark · <span class="pill pill-light"></span> Light <span style="margin-left:4px;">← We do both</span>
+    </div>
+  </div>
+  <div class="hero-visual" role="img" aria-label="Fresh Mexican burritos"></div>
+</section>
+
+<section>
+  <div class="section-label">Made Fresh Daily</div>
+  <h2>Family Recipes. <span>Zero Shortcuts.</span></h2>
+  <p class="subtitle">Every tortilla is hand-pressed. Every salsa is made in-house. This is the real deal.</p>
+  <div class="menu-grid">
+    <div class="menu-card"><span class="tag">Bestseller</span><span class="price">$11</span><h3>California Burrito</h3><p>Carne asada, crispy fries, cheese, guac, sour cream, salsa. The one that started it all.</p></div>
+    <div class="menu-card"><span class="tag">Vegetarian</span><span class="price">$9</span><h3>Veggie Supreme</h3><p>Grilled veggies, black beans, rice, pico de gallo, guacamole, crema.</p></div>
+    <div class="menu-card"><span class="tag">Chef's Pick</span><span class="price">$13</span><h3>Surf & Turf</h3><p>Shrimp, carne asada, bacon, cheese, pico de gallo, chipotle crema.</p></div>
+    <div class="menu-card"><span class="tag">Classic</span><span class="price">$7</span><h3>Street Tacos (3)</h3><p>Your choice: asada, al pastor, chicken, or carnitas. Onion, cilantro, salsa.</p></div>
+  </div>
+
+  <div class="specials-strip">
+    <div class="special-card"><h3>$5 Margarita Mondays</h3><p>All day. Every Monday. You're welcome.</p></div>
+    <div class="special-card"><h3>Taco Tuesday</h3><p>$2 street tacos. Enough said.</p></div>
+    <div class="special-card"><h3>Happy Hour 4-7pm</h3><p>Half off apps and $4 domestics.</p></div>
+  </div>
+</section>
+
+<div class="info-strip">
+  <div class="info-item"><h3>Location</h3><p>6328 Hollywood Blvd<br>Los Angeles, CA 90028</p></div>
+  <div class="info-item"><h3>Hours</h3><p>Mon–Thu: 11am – 10pm<br>Fri–Sat: 12pm – 10:30pm<br>Sun: 11am – 10pm</p></div>
+  <div class="info-item"><h3>Contact</h3><p>(323) 460-4178</p></div>
+</div>
+
+<section>
+  <div class="cta-banner">
+    <h2>Hungry Yet?</h2>
+    <p>Order online for pickup or delivery. Catering available for your next event.</p>
+    <a href="#" class="btn-primary">Start Your Order</a>
+  </div>
+</section>
+
+<footer class="footer">&copy; 2026 Dos Burritos — Hollywood. Since 1996.</footer>
+</body>
+</html>
