@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basecamp Fitness WeHo – West Hollywood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0d0e;
+      color: #e8ecef;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Colors ── */
+    :root {
+      --neon-green: #39ff14;
+      --cyan: #00f0ff;
+      --dark-bg: #0b0d0e;
+      --panel-bg: #141718;
+      --card-bg: #1a1d1f;
+      --accent-gradient: linear-gradient(135deg, #39ff14, #00f0ff);
+      --text-light: #e8ecef;
+      --text-muted: #8a9094;
+    }
+
+    /* ── Typography ── */
+    .font-display { font-family: 'Archivo Black', sans-serif; }
+    .font-condensed { font-family: 'Oswald', sans-serif; }
+
+    /* ── Mockup Chrome ── */
+    .mockup-chrome {
+      position: relative;
+      max-width: 1280px;
+      margin: 20px auto;
+      background: #1c1e20;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 0 60px rgba(57, 255, 20, 0.06), 0 20px 60px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
+    .chrome-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #2a2c2e;
+      border-bottom: 1px solid #383b3e;
+    }
+    .chrome-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .chrome-dots span {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      display: block;
+    }
+    .chrome-dots span:nth-child(1) { background: #ff5f57; }
+    .chrome-dots span:nth-child(2) { background: #ffbd2e; }
+    .chrome-dots span:nth-child(3) { background: #28c840; }
+
+    .chrome-badge {
+      background: var(--accent-gradient);
+      color: #0b0d0e;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+    .chrome-url {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #8a9094;
+      background: #0b0d0e;
+      padding: 5px 16px;
+      border-radius: 6px;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .chrome-url span { color: #39ff14; }
+
+    /* ── Nav ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      background: var(--dark-bg);
+      border-bottom: 1px solid #1e2122;
+    }
+    .logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 26px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    .logo small {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      -webkit-text-fill-color: #8a9094;
+      display: block;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #b0b6ba;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--neon-green); }
+
+    .nav-cta {
+      background: var(--accent-gradient);
+      color: #0b0d0e;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 10px 28px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: filter 0.3s, transform 0.2s;
+    }
+    .nav-cta:hover { filter: brightness(1.15); transform: scale(1.03); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(57,255,20,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(0,240,255,0.06) 0%, transparent 60%),
+        var(--dark-bg);
+      overflow: hidden;
+      padding: 40px 24px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2339ff14' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(0,240,255,0.25);
+      padding: 6px 18px;
+      border-radius: 30px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+    .hero h1 span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #b0b6ba;
+      max-width: 580px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #0b0d0e;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 16px 44px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: filter 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { filter: brightness(1.15); transform: scale(1.03); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--neon-green);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 16px 44px;
+      border: 2px solid var(--neon-green);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(57,255,20,0.1); transform: scale(1.03); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #4a4e52;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+      animation: float 2.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    /* ── Section Shared ── */
+    .section {
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .section-title span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── Class Types ── */
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .class-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 36px 28px;
+      border: 1px solid #242729;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .class-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .class-card:hover { border-color: #39ff14; transform: translateY(-4px); }
+    .class-card:hover::after { opacity: 1; }
+
+    .class-icon {
+      font-size: 36px;
+      margin-bottom: 18px;
+    }
+    .class-card h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 20px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .class-card p {
+      color: #8a9094;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .class-card .tag {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--neon-green);
+      background: rgba(57,255,20,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 14px;
+    }
+
+    /* ── Schedule Preview ── */
+    .schedule-bg {
+      background: var(--panel-bg);
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Oswald', sans-serif;
+    }
+    .schedule-table thead th {
+      text-align: left;
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border-bottom: 2px solid #242729;
+    }
+    .schedule-table tbody td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #1e2122;
+      font-size: 16px;
+      font-weight: 400;
+      color: #c8ccd0;
+    }
+    .schedule-table tbody td:first-child { color: #fff; font-weight: 600; }
+    .schedule-table tbody tr:hover td { background: rgba(57,255,20,0.04); }
+    .schedule-badge {
+      display: inline-block;
+      background: var(--accent-gradient);
+      color: #0b0d0e;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 2px 12px;
+      border-radius: 20px;
+    }
+
+    /* ── Pricing ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 16px;
+    }
+    .pricing-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 40px 32px;
+      border: 1px solid #242729;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pricing-card.featured {
+      border-color: var(--neon-green);
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(57,255,20,0.08);
+    }
+    .pricing-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-gradient);
+      color: #0b0d0e;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 20px;
+      border-radius: 20px;
+    }
+    .pricing-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+    .pricing-card.featured:hover { transform: scale(1.02) translateY(-4px); }
+
+    .pricing-name {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .pricing-price {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 44px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+    .pricing-price small {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      -webkit-text-fill-color: #8a9094;
+      font-weight: 400;
+    }
+    .pricing-desc {
+      color: #8a9094;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      padding: 8px 0;
+      color: #b0b6ba;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-features li::before {
+      content: '✦';
+      color: var(--neon-green);
+      font-size: 12px;
+    }
+    .pricing-btn {
+      width: 100%;
+      background: transparent;
+      color: var(--neon-green);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 14px;
+      border: 2px solid var(--neon-green);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .pricing-btn:hover { background: var(--neon-green); color: #0b0d0e; }
+    .pricing-card.featured .pricing-btn {
+      background: var(--accent-gradient);
+      color: #0b0d0e;
+      border: none;
+    }
+    .pricing-card.featured .pricing-btn:hover {
+      filter: brightness(1.15);
+    }
+
+    /* ── Info Strip ── */
+    .info-strip {
+      background: var(--panel-bg);
+      border-top: 1px solid #1e2122;
+      border-bottom: 1px solid #1e2122;
+      padding: 60px 40px;
+    }
+    .info-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+    }
+    .info-item h4 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+    .info-item p, .info-item a {
+      font-size: 16px;
+      color: #c8ccd0;
+      line-height: 1.7;
+      text-decoration: none;
+    }
+    .info-item a:hover { color: var(--neon-green); }
+
+    /* ── Dead Site CTA ── */
+    .dead-site-cta {
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(57,255,20,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(0,240,255,0.08) 0%, transparent 60%),
+        var(--dark-bg);
+      padding: 80px 40px;
+      text-align: center;
+      border-bottom: 1px solid #1e2122;
+    }
+    .dead-site-cta .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .dead-site-cta h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .dead-site-cta h2 span { color: var(--neon-green); }
+    .dead-site-cta p {
+      color: #8a9094;
+      font-size: 16px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .dead-site-cta .btn-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .dead-site-cta .btn-group .btn-primary { padding: 14px 36px; font-size: 14px; }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 32px 40px;
+      text-align: center;
+      background: #080a0b;
+    }
+    .footer p {
+      font-size: 13px;
+      color: #4a4e52;
+      letter-spacing: 0.5px;
+    }
+    .footer strong {
+      font-family: 'Archivo Black', sans-serif;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .chrome-url { display: none; }
+      .nav { flex-wrap: wrap; gap: 16px; padding: 14px 20px; }
+      .nav-links { gap: 16px; flex-wrap: wrap; }
+      .nav-links a { font-size: 13px; }
+      .section { padding: 60px 20px; }
+      .hero { min-height: 80vh; }
+      .pricing-card.featured { transform: none; }
+      .pricing-card.featured:hover { transform: translateY(-4px); }
+      .schedule-table { font-size: 13px; }
+      .schedule-table thead th, .schedule-table tbody td { padding: 12px 12px; }
+      .info-strip { padding: 40px 20px; }
+      .dead-site-cta { padding: 50px 20px; }
+      .footer { padding: 24px 20px; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: clamp(2rem, 12vw, 3.5rem); }
+      .class-card { padding: 24px 20px; }
+      .pricing-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ MOCKUP CHROME ═══════════ -->
+<div class="mockup-chrome">
+  <div class="chrome-bar">
+    <div class="chrome-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="chrome-url">
+      <span>🔒</span> basecampfitness.co/weho
+    </div>
+    <div class="chrome-badge">Mockup · DYE Design</div>
+  </div>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav class="nav">
+    <div class="logo">
+      BASECAMP
+      <small>West Hollywood</small>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#info">Info</a></li>
+    </ul>
+    <button class="nav-cta">Free Trial</button>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Est. 2022 · WeHo</div>
+      <h1>West Hollywood's<br><span>Premier Fitness</span></h1>
+      <p>Elite training, electrifying energy, and a community that pushes you further. Welcome to Basecamp Fitness WeHo — where your limits get left behind.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Start Your Journey</button>
+        <button class="btn-secondary">View Classes</button>
+      </div>
+    </div>
+    <div class="hero-scroll">▼ Scroll</div>
+  </section>
+
+  <!-- ═══════════ CLASSES ═══════════ -->
+  <section class="section" id="classes">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Train Different</div>
+        <h2 class="section-title">Class <span>Types</span></h2>
+      </div>
+    </div>
+    <div class="classes-grid">
+      <div class="class-card">
+        <div class="class-icon">🔥</div>
+        <h3>Basecamp HIIT</h3>
+        <p>High-intensity interval training combining bodyweight and kettlebell work. Maximum effort, maximum results.</p>
+        <span class="tag">HIIT · 45 min</span>
+      </div>
+      <div class="class-card">
+        <div class="class-icon">🏋️</div>
+        <h3>Iron Circuit</h3>
+        <p>Full-body strength circuit using barbells, dumbbells, and resistance machines. Build lean muscle and raw power.</p>
+        <span class="tag">Strength · 50 min</span>
+      </div>
+      <div class="class-card">
+        <div class="class-icon">🧘</div>
+        <h3>Recover &amp; Flow</h3>
+        <p>Mobility, stretching, and breathwork to accelerate recovery and keep you moving pain-free.</p>
+        <span class="tag">Recovery · 40 min</span>
+      </div>
+      <div class="class-card">
+        <div class="class-icon">⚡</div>
+        <h3>Pulse Ride</h3>
+        <p>Indoor cycling with immersive lighting and curated playlists. A cardio experience that flies by.</p>
+        <span class="tag">Cycling · 45 min</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SCHEDULE ═══════════ -->
+  <div class="schedule-bg" id="schedule">
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Plan Your Week</div>
+          <h2 class="section-title">Schedule <span>Preview</span></h2>
+        </div>
+      </div>
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6:00 AM</td>
+            <td>HIIT</td>
+            <td>Iron</td>
+            <td>HIIT</td>
+            <td>Iron</td>
+            <td>HIIT</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>7:30 AM</td>
+            <td>Pulse</td>
+            <td>Flow</td>
+            <td>Pulse</td>
+            <td>Flow</td>
+            <td>Pulse</td>
+            <td>HIIT</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>12:00 PM</td>
+            <td>HIIT</td>
+            <td>HIIT</td>
+            <td>Iron</td>
+            <td>HIIT</td>
+            <td>Iron</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>5:30 PM</td>
+            <td>Iron</td>
+            <td>Pulse</td>
+            <td>HIIT</td>
+            <td>Pulse</td>
+            <td>HIIT</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>7:00 PM</td>
+            <td>Flow</td>
+            <td>HIIT</td>
+            <td>Flow</td>
+            <td>HIIT</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>9:00 AM</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Pulse</td>
+            <td>Flow</td>
+          </tr>
+          <tr>
+            <td>10:00 AM</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Iron</td>
+            <td>HIIT</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- ═══════════ PRICING ═══════════ -->
+  <section class="section" id="pricing">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Invest in You</div>
+        <h2 class="section-title">Pricing <span>Tiers</span></h2>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Drop-In</div>
+        <div class="pricing-price">$28 <small>/ session</small></div>
+        <p class="pricing-desc">Perfect for trying us out or occasional visits.</p>
+        <ul class="pricing-features">
+          <li>Any single class</li>
+          <li>Equipment access</li>
+          <li>Locker &amp; shower</li>
+          <li>No commitment</li>
+        </ul>
+        <button class="pricing-btn">Get Started</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-name">Unlimited</div>
+        <div class="pricing-price">$139 <small>/ month</small></div>
+        <p class="pricing-desc">Our most popular plan. Train as often as you want.</p>
+        <ul class="pricing-features">
+          <li>Unlimited classes</li>
+          <li>All equipment access</li>
+          <li>Locker &amp; shower</li>
+          <li>Guest pass (2/mo)</li>
+          <li>Nutrition guide</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <button class="pricing-btn">Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Punch Card</div>
+        <div class="pricing-price">$200 <small>/ 10 pack</small></div>
+        <p class="pricing-desc">Flexible commitment at a discounted rate.</p>
+        <ul class="pricing-features">
+          <li>10 class sessions</li>
+          <li>Equipment access</li>
+          <li>Locker &amp; shower</li>
+          <li>Shareable with friends</li>
+          <li>No expiration</li>
+        </ul>
+        <button class="pricing-btn">Get Started</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ INFO STRIP ═══════════ -->
+  <div class="info-strip" id="info">
+    <div class="info-grid">
+      <div class="info-item">
+        <h4>📍 Location</h4>
+        <p>8714 Santa Monica Blvd<br>West Hollywood, CA 90069</p>
+      </div>
+      <div class="info-item">
+        <h4>🕐 Hours</h4>
+        <p>
+          Mon – Fri &nbsp; 5:30 AM – 9:00 PM<br>
+          Sat &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7:00 AM – 6:00 PM<br>
+          Sun &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00 AM – 4:00 PM
+        </p>
+      </div>
+      <div class="info-item">
+        <h4>📞 Contact</h4>
+        <p>
+          <a href="tel:+14243430555">+1-424-343-0555</a><br>
+          <a href="mailto:weho@basecampfitness.co">weho@basecampfitness.co</a>
+        </p>
+      </div>
+      <div class="info-item">
+        <h4>🚗 Parking</h4>
+        <p>Free 2-hour lot behind the building. Street parking also available.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DEAD SITE CTA ═══════════ -->
+  <section class="dead-site-cta">
+    <div class="inner">
+      <h2>⚠️ Our website is <span>offline</span></h2>
+      <p>We're rebuilding. In the meantime, reach us directly by phone, email, or just walk in — first class is on us.</p>
+      <div class="btn-group">
+        <a href="tel:+14243430555" class="btn-primary">Call Now</a>
+        <a href="mailto:weho@basecampfitness.co" class="btn-secondary">Email Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <p>&copy; 2026 <strong>BASECAMP FITNESS</strong> WeHo. All rights reserved. &nbsp;|&nbsp; Built by <strong>DYE Design</strong></p>
+  </footer>
+
+</div><!-- /.mockup-chrome -->
+
+</body>
+</html>

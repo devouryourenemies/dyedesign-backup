@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harmony Studios · Pilates &amp; Wellness | Proposed Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #2c3a2c;
+  line-height: 1.6;
+  background: #f6f7f3;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ── Colors ── */
+:root {
+  --sage: #8a9a7a;
+  --sage-light: #d4ddc8;
+  --sage-dark: #5a6b4a;
+  --teal: #5a7d7a;
+  --teal-light: #c8d9d6;
+  --warm-wood: #b8956e;
+  --warm-wood-light: #e8d5c0;
+  --cream: #f6f7f3;
+  --off-white: #fafaf7;
+  --charcoal: #2c3a2c;
+  --text-muted: #7a8a7a;
+  --white: #ffffff;
+  --shadow: 0 2px 20px rgba(44,58,44,0.06);
+  --shadow-hover: 0 8px 40px rgba(44,58,44,0.10);
+  --radius: 14px;
+}
+
+/* ── Browser Chrome ── */
+.browser-chrome {
+  background: #e8e8e4;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  border-bottom: 1px solid #d0d0cc;
+}
+.chrome-bar {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 12px;
+  background: linear-gradient(180deg, #f0f0ec 0%, #e4e4e0 100%);
+}
+.chrome-dots {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.chrome-dot {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+}
+.chrome-dot.red { background: #ff5f56; }
+.chrome-dot.yellow { background: #ffbd2e; }
+.chrome-dot.green { background: #27c93f; }
+
+.chrome-url {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: #6b7a6b;
+  gap: 14px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+.chrome-url .url-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chrome-url .url-text .lock-icon {
+  font-size: 12px;
+}
+.chrome-url .url-text span {
+  color: #4a5a4a;
+  font-weight: 500;
+}
+.chrome-badge {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.chrome-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px 8px;
+  font-size: 12px;
+  color: #6b7a6b;
+}
+.chrome-tab .tab-active {
+  padding: 6px 16px;
+  background: var(--white);
+  border-radius: 6px 6px 0 0;
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+/* ── Navigation ── */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid #e4e7e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 68px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo .logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--sage), var(--teal));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--white);
+  font-weight: 600;
+}
+.nav-logo .logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--charcoal);
+  letter-spacing: -0.5px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--sage);
+  transition: width 0.2s;
+}
+.nav-links a:hover { color: var(--charcoal); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+  color: var(--white) !important;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600 !important;
+  font-size: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.2px;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(90,107,74,0.3);
+}
+.nav-cta::after { display: none !important; }
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--charcoal);
+  border-radius: 2px;
+  transition: 0.2s;
+}
+
+/* ── Hero ── */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-left h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--charcoal);
+  margin-bottom: 20px;
+}
+.hero-left .hero-accent {
+  color: var(--sage-dark);
+}
+.hero-left p {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(90,107,74,0.3);
+}
+.btn-secondary {
+  background: var(--white);
+  color: var(--charcoal);
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  border: 1.5px solid var(--sage-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--sage);
+  transform: translateY(-2px);
+}
+.hero-right {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(44,58,44,0.12);
+}
+.hero-right img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+.hero-float-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.hero-float-tag .dot-pulse {
+  width: 8px; height: 8px;
+  background: #27c93f;
+  border-radius: 50%;
+  animation: pulse-dot 1.5s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+/* ── Section Titles ── */
+.section-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--sage);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+.section-sub {
+  color: var(--text-muted);
+  font-size: 16px;
+  max-width: 540px;
+  margin: 0 auto 48px;
+}
+
+/* ── Classes ── */
+.classes {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  text-align: center;
+}
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.class-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 40px 28px 32px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #edf0e8;
+  display: flex;
+  flex-direction: column;
+}
+.class-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+.class-card .class-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.class-card:nth-child(1) .class-icon { background: #e8efe4; }
+.class-card:nth-child(2) .class-icon { background: #e4eae8; }
+.class-card:nth-child(3) .class-icon { background: #e8e4e8; }
+.class-card:nth-child(4) .class-icon { background: #efe4e4; }
+.class-card h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.class-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 20px;
+}
+.class-card .class-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sage-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+.class-card .class-link:hover { gap: 10px; }
+
+/* ── Info Strip ── */
+.info-strip {
+  background: linear-gradient(135deg, #2c3a2c 0%, #3a4a3a 100%);
+  color: var(--white);
+  padding: 60px 32px;
+}
+.info-strip-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.info-item {
+  text-align: center;
+}
+.info-item .info-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+.info-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--sage-light);
+  margin-bottom: 10px;
+}
+.info-item p {
+  font-size: 15px;
+  color: #cdd9cd;
+  line-height: 1.6;
+}
+.info-item .info-strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* ── Testimonials ── */
+.testimonials {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  text-align: center;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.testimonial-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  border: 1px solid #edf0e8;
+  position: relative;
+}
+.testimonial-card::before {
+  content: '"';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--sage-light);
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  opacity: 0.6;
+}
+.testimonial-card blockquote {
+  font-size: 15px;
+  color: var(--charcoal);
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-top: 16px;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.testimonial-author .avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sage-light), var(--teal-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sage-dark);
+}
+.testimonial-author .author-info strong {
+  display: block;
+  font-size: 14px;
+  color: var(--charcoal);
+}
+.testimonial-author .author-info span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── CTA Banner ── */
+.cta-banner {
+  background: linear-gradient(135deg, #1a2a1a 0%, #2c3a2c 50%, #3a4a3a 100%);
+  padding: 64px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(138,154,122,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(90,125,122,0.06) 0%, transparent 50%);
+}
+.cta-banner-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.cta-banner .cta-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,95,86,0.15);
+  border: 1px solid rgba(255,95,86,0.3);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff6b5a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.cta-banner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.cta-banner p {
+  color: #b8c8b8;
+  font-size: 16px;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.cta-banner .btn-primary {
+  background: var(--white);
+  color: var(--charcoal);
+  font-size: 15px;
+  padding: 16px 40px;
+}
+.cta-banner .btn-primary:hover {
+  background: var(--sage-light);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+footer {
+  background: var(--charcoal);
+  border-top: 1px solid #3a4a3a;
+  padding: 40px 32px;
+  text-align: center;
+}
+footer p {
+  font-size: 14px;
+  color: #8a9a8a;
+  margin-bottom: 4px;
+}
+footer .footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--sage-light);
+  margin-bottom: 8px;
+}
+footer .footer-credit {
+  font-size: 12px;
+  color: #6a7a6a;
+}
+footer .footer-credit strong {
+  color: var(--sage);
+  font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .class-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-left h1 { font-size: 42px; }
+}
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 40px; }
+  .hero-right { order: -1; }
+  .hero-right img { height: 300px; }
+  .hero-left h1 { font-size: 36px; }
+  .hero-left p { max-width: 100%; }
+  .info-strip-inner { grid-template-columns: 1fr; gap: 32px; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-cta { display: none; }
+  .nav-inner { padding: 0 20px; }
+  .chrome-url { font-size: 11px; padding: 4px 10px; gap: 8px; flex-wrap: wrap; }
+  .chrome-badge { font-size: 9px; padding: 3px 10px; }
+  .chrome-tab { display: none; }
+  .chrome-bar { padding: 8px 12px; }
+  .class-grid { grid-template-columns: 1fr; gap: 16px; }
+  .classes, .testimonials { padding: 48px 20px; }
+  .section-title { font-size: 30px; }
+  .cta-banner h2 { font-size: 30px; }
+  .cta-banner { padding: 48px 20px; }
+  .hero-left h1 { font-size: 30px; }
+  .hero { padding: 32px 20px 40px; gap: 28px; }
+}
+
+@media (max-width: 480px) {
+  .hero-right img { height: 220px; }
+  .hero-float-tag { font-size: 11px; padding: 8px 14px; }
+  .hero-buttons .btn-primary, .hero-buttons .btn-secondary {
+    width: 100%; justify-content: center;
+  }
+}
+
+/* ── Misc ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+</style>
+</head>
+<body>
+
+<!-- ════ Browser Chrome ════ -->
+<div class="browser-chrome">
+  <div class="chrome-bar">
+    <div class="chrome-dots">
+      <span class="chrome-dot red"></span>
+      <span class="chrome-dot yellow"></span>
+      <span class="chrome-dot green"></span>
+    </div>
+    <div class="chrome-url">
+      <span class="url-text">
+        <span class="lock-icon">🔒</span>
+        <span>harmonystudiosla.com</span>
+      </span>
+      <span style="opacity:0.3;">|</span>
+      <span style="color:#aa4a4a; font-weight:500;">⚠ Hijacked</span>
+    </div>
+    <div class="chrome-badge">✨ Proposed Redesign</div>
+  </div>
+  <div class="chrome-tab">
+    <span class="tab-active">📄 harmonystudiosla.com</span>
+    <span>✕</span>
+  </div>
+</div>
+
+<!-- ════ Navigation ════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">H</div>
+      <span class="logo-text">Harmony Studios</span>
+    </div>
+    <div class="nav-links">
+      <a href="#classes">Classes</a>
+      <a href="#">Schedule</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#" class="nav-cta">Book a Class</a>
+    </div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ════ Hero ════ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="section-tag">West Hollywood · Since 2018</div>
+    <h1>Pilates &amp; Wellness <br>in the <span class="hero-accent">Heart of WeHo</span></h1>
+    <p>
+      Reclaim your center at Harmony Studios — where expert instruction, 
+      mindful movement, and a warm community come together. Your practice 
+      awaits at our sunlit Santa Monica Blvd studio.
+    </p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Explore Classes →</a>
+      <a href="#" class="btn-secondary">View Schedule</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img 
+      src="https://images.unsplash.com/photo-1518310383802-6b8a5a4c9b8c?w=600&h=500&fit=crop&auto=format" 
+      alt="Bright Pilates studio with reformers and natural light"
+      loading="lazy"
+    >
+    <div class="hero-float-tag">
+      <span class="dot-pulse"></span>
+      Open — drop in today
+    </div>
+  </div>
+</section>
+
+<!-- ════ Classes ════ -->
+<section class="classes" id="classes">
+  <div class="section-tag">Our Offerings</div>
+  <h2 class="section-title">Classes Built for Every Body</h2>
+  <p class="section-sub">
+    From dynamic reformer sessions to grounding mat work — each class is 
+    designed to build strength, flexibility, and mind-body connection.
+  </p>
+  <div class="class-grid">
+    <div class="class-card">
+      <div class="class-icon">🔄</div>
+      <h3>Reformer Pilates</h3>
+      <p>
+        Build long, lean muscle and improve posture using our top-of-the-line 
+        reformers. Small class sizes ensure personalised attention.
+      </p>
+      <a href="#" class="class-link">Learn more →</a>
+    </div>
+    <div class="class-card">
+      <div class="class-icon">🧘</div>
+      <h3>Mat Pilates</h3>
+      <p>
+        The classic Pilates practice — no equipment needed beyond your own 
+        body weight. Core strength, stability, and grace in every movement.
+      </p>
+      <a href="#" class="class-link">Learn more →</a>
+    </div>
+    <div class="class-card">
+      <div class="class-icon">🌿</div>
+      <h3>Yoga Flow</h3>
+      <p>
+        A seamless blend of Vinyasa flow and mindful breathwork. Improve 
+        flexibility and find stillness in a dynamic, welcoming environment.
+      </p>
+      <a href="#" class="class-link">Learn more →</a>
+    </div>
+    <div class="class-card">
+      <div class="class-icon">⭐</div>
+      <h3>Private Training</h3>
+      <p>
+        One-on-one sessions tailored to your goals — whether rehab, athletic 
+        performance, or deepening your practice with expert guidance.
+      </p>
+      <a href="#" class="class-link">Learn more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Info Strip ════ -->
+<div class="info-strip">
+  <div class="info-strip-inner">
+    <div class="info-item">
+      <div class="info-icon">📍</div>
+      <h4>Location</h4>
+      <p class="info-strong">8440 Santa Monica Blvd</p>
+      <p>West Hollywood, CA 90069</p>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">🕐</div>
+      <h4>Hours</h4>
+      <p class="info-strong">Mon–Fri: 6am – 8pm</p>
+      <p class="info-strong">Sat–Sun: 7am – 6pm</p>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">📞</div>
+      <h4>Contact</h4>
+      <p class="info-strong">+1-323-822-9584</p>
+      <p>harmonystudios@harmonystudiosla.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Testimonials ════ -->
+<section class="testimonials">
+  <div class="section-tag">Testimonials</div>
+  <h2 class="section-title">What Our Community Says</h2>
+  <p class="section-sub">
+    Hear from the members who make Harmony Studios such a special place.
+  </p>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <blockquote>
+        Harmony Studios completely transformed my relationship with movement. 
+        The instructors are so attentive and the space just glows with positive 
+        energy. I've never felt stronger.
+      </blockquote>
+      <div class="testimonial-author">
+        <div class="avatar">SM</div>
+        <div class="author-info">
+          <strong>Sofia M.</strong>
+          <span>Member since 2022</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <blockquote>
+        I tried Pilates at a few places around LA, but Harmony is the only 
+        studio that felt like home from day one. The reformer classes are 
+        incredible — such a great workout in a supportive environment.
+      </blockquote>
+      <div class="testimonial-author">
+        <div class="avatar">JD</div>
+        <div class="author-info">
+          <strong>Jordan D.</strong>
+          <span>Reformer regular</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <blockquote>
+        After a back injury I was nervous about exercising again. The private 
+        training team at Harmony tailored a program that rebuilt my strength 
+        safely. I'm so grateful for their expertise and care.
+      </blockquote>
+      <div class="testimonial-author">
+        <div class="avatar">AL</div>
+        <div class="author-info">
+          <strong>Alex L.</strong>
+          <span>Private training client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA Banner ════ -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <div class="cta-warning">⚠️ Domain Hijacked</div>
+    <h2>Your website has been hijacked —<br>let's rebuild it.</h2>
+    <p>
+      Right now, harmonystudiosla.com redirects to a Bulgarian football blog. 
+      Your clients can't find you, and your beautiful studio deserves the 
+      online presence it was built for. Let's reclaim your digital home.
+    </p>
+    <a href="#" class="btn-primary">Let's Build Your New Site →</a>
+  </div>
+</section>
+
+<!-- ════ Footer ════ -->
+<footer>
+  <p class="footer-brand">Harmony Studios</p>
+  <p>8440 Santa Monica Blvd · West Hollywood, CA 90069</p>
+  <p>+1-323-822-9584 · harmonystudios@harmonystudiosla.com</p>
+  <p style="margin-top:16px; font-size:13px;">&copy; 2025 Harmony Studios. All rights reserved.</p>
+  <p class="footer-credit" style="margin-top:4px;">Proposed redesign by <strong>DYE Design</strong></p>
+</footer>
+
+</body>
+</html>
