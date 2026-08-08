@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivory on Sunset — Proposed Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0F0D0A;
+  --surface: #1A1612;
+  --border: rgba(255,255,255,0.06);
+  --accent: #C4943A;
+  --accent-light: #D4A54A;
+  --text: #F5F0EB;
+  --text-muted: #A0968A;
+  --terracotta: #C0512F;
+  font-size: 16px;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: #E8E2D8;
+  color: #1A1612;
+  line-height: 1.6;
+}
+
+/* Browser Chrome */
+.chrome {
+  background: #D1CBC1;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: static;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.dots { display: flex; gap: 7px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FFBD2E; }
+.dot-g { background: #28C840; }
+.url-bar {
+  flex: 1; background: #F0EBE4; border-radius: 6px;
+  padding: 6px 14px; font-size: 0.8rem; color: #666;
+  display: flex; align-items: center; gap: 8px;
+  max-width: 600px;
+}
+.url-bar .lock { color: #666; font-size: 0.7rem; }
+.badge {
+  background: var(--accent); color: #0F0D0A; font-size: 0.65rem;
+  font-weight: 600; padding: 4px 10px; border-radius: 4px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+
+/* Mockup Content */
+.mockup {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* Navigation */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--text); letter-spacing: 1px;
+}
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  background: var(--accent); color: #0F0D0A !important;
+  padding: 0.6rem 1.5rem; border-radius: 999px;
+  font-weight: 600 !important;
+}
+
+/* Hero */
+.hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+}
+.hero-left {
+  padding: 4rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-badge {
+  font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 3px; color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 700;
+  color: var(--text); line-height: 1.15; margin-bottom: 0.5rem;
+}
+.hero h1 .highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-tagline {
+  font-size: 1.2rem; color: var(--text-muted);
+  margin: 1rem 0 2rem; font-weight: 300;
+  max-width: 450px;
+}
+.hero-ctas { display: flex; gap: 1rem; }
+.btn-primary {
+  background: var(--accent); color: #0F0D0A;
+  padding: 0.9rem 2rem; border-radius: 999px;
+  text-decoration: none; font-weight: 600;
+  font-size: 0.9rem; transition: all 0.2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,148,58,0.3); }
+.btn-secondary {
+  border: 1px solid var(--border); color: var(--text);
+  padding: 0.9rem 2rem; border-radius: 999px;
+  text-decoration: none; font-weight: 500;
+  font-size: 0.9rem; transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-right {
+  background: linear-gradient(135deg, #1A1612 0%, #2A2218 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-right::before {
+  content: ''; position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(196,148,58,0.08) 0%, transparent 70%);
+  top: -100px; right: -100px;
+}
+.hero-right::after {
+  content: ''; position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(192,81,47,0.06) 0%, transparent 70%);
+  bottom: -50px; left: -50px;
+}
+.hero-image-placeholder {
+  width: 80%; height: 70%;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=500&fit=crop') center/cover;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.hero-image-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+.hero-image-overlay h3 {
+  font-family: 'Playfair Display', serif;
+  color: white; font-size: 1.2rem;
+}
+.hero-image-overlay p { color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+
+/* Section Label */
+.section-label {
+  text-align: center;
+  font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 3px; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* Menu Preview */
+.menu-section {
+  padding: 5rem 3rem;
+  border-top: 1px solid var(--border);
+}
+.menu-section h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; color: var(--text);
+  margin-bottom: 3rem;
+}
+.menu-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+}
+.menu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  transition: all 0.2s;
+}
+.menu-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.menu-card .price {
+  color: var(--accent); font-weight: 600;
+  font-size: 0.9rem; margin-bottom: 0.5rem;
+}
+.menu-card h4 {
+  color: var(--text); font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+.menu-card p {
+  color: var(--text-muted); font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Theme indicator */
+.theme-toggle {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  border-top: 1px solid var(--border);
+}
+.theme-toggle span { color: var(--accent); font-weight: 600; }
+
+/* Gallery */
+.gallery-section {
+  padding: 5rem 3rem;
+  border-top: 1px solid var(--border);
+}
+.gallery-section h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; color: var(--text);
+  margin-bottom: 3rem;
+}
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1rem; max-width: 1000px; margin: 0 auto;
+}
+.gallery-item {
+  aspect-ratio: 1;
+  border-radius: 10px; overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.gallery-item .caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 0.75rem; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: white; font-size: 0.75rem;
+}
+
+/* Info Strip */
+.info-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.info-item {
+  padding: 2.5rem 2rem; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.info-item:last-child { border-right: none; }
+.info-item .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.info-item h4 {
+  color: var(--accent); font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+.info-item p { color: var(--text); font-size: 0.9rem; }
+.info-item .sub { color: var(--text-muted); font-size: 0.8rem; }
+
+/* CTA Banner */
+.cta-banner {
+  padding: 5rem 3rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--surface) 0%, #1A1612 100%);
+}
+.cta-banner h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; color: var(--text);
+  margin-bottom: 1rem;
+}
+.cta-banner p {
+  color: var(--text-muted); font-size: 1.1rem;
+  max-width: 500px; margin: 0 auto 2rem;
+}
+
+/* Footer */
+footer {
+  padding: 2rem 3rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .nav-links { flex-wrap: wrap; gap: 1rem; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 2rem 1.5rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero-right { min-height: 40vh; }
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .info-strip { grid-template-columns: 1fr; }
+  .info-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .info-item:last-child { border-bottom: none; }
+  .menu-section, .gallery-section, .cta-banner { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="chrome">
+  <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+  <div class="url-bar"><span class="lock">🔒</span> ivoryonsunset.com — MOCKUP</div>
+  <div class="badge">Proposed Redesign</div>
+</div>
+
+<div class="mockup">
+  <nav>
+    <div class="logo"><span>I</span>vory <span>O</span>n <span>S</span>unset</div>
+    <div class="nav-links">
+      <a href="#">Menu</a>
+      <a href="#">Reservations</a>
+      <a href="#">Events</a>
+      <a href="#">About</a>
+      <a href="#">Gallery</a>
+      <a href="#" class="nav-cta">Reserve a Table</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">Modern American Cuisine — Sunset Blvd</div>
+      <h1>Where <span class="highlight">Sunset</span><br>Meets <span class="highlight">Elegance</span></h1>
+      <p class="hero-tagline">An elevated dining experience in the heart of West Hollywood. Seasonal ingredients, handcrafted cocktails, and an atmosphere that lingers.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Make a Reservation</a>
+        <a href="#" class="btn-secondary">View Menu</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-image-placeholder">
+        <div class="hero-image-overlay">
+          <h3>Private Dining Room</h3>
+          <p>Available for events up to 40 guests</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="theme-toggle">
+    Dark · Light ← <span>We do both</span>
+  </div>
+
+  <section class="menu-section">
+    <div class="section-label">Curated Selections</div>
+    <h2>From Our Kitchen</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="price">$24</div>
+        <h4>Wagyu Tartare</h4>
+        <p>Prime wagyu, cured egg yolk, caper vinaigrette, grilled sourdough</p>
+      </div>
+      <div class="menu-card">
+        <div class="price">$18</div>
+        <h4>Roasted Bone Marrow</h4>
+        <p>Herb gremolata, pickled shallots, toasted brioche</p>
+      </div>
+      <div class="menu-card">
+        <div class="price">$38</div>
+        <h4>Herb-Crusted Lamb Rack</h4>
+        <p>Rosemary jus, summer vegetables, truffle mashed potatoes</p>
+      </div>
+      <div class="menu-card">
+        <div class="price">$16</div>
+        <h4>Gold Rush Cocktail</h4>
+        <p>Bourbon, honey, lemon, saffron bitters — our signature</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="section-label">The Experience</div>
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=250&h=250&fit=crop') center/cover">
+        <div class="caption">Bar Lounge</div>
+      </div>
+      <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=250&h=250&fit=crop') center/cover">
+        <div class="caption">Main Dining</div>
+      </div>
+      <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=250&h=250&fit=crop') center/cover">
+        <div class="caption">Private Events</div>
+      </div>
+      <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1470337458703-46ad175a6289?w=250&h=250&fit=crop') center/cover">
+        <div class="caption">Cocktails</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="icon">📍</div>
+      <h4>Location</h4>
+      <p>8440 Sunset Blvd</p>
+      <p class="sub">West Hollywood, CA 90069</p>
+    </div>
+    <div class="info-item">
+      <div class="icon">🕐</div>
+      <h4>Hours</h4>
+      <p>Sun–Thu 7:00 AM – 10:30 PM</p>
+      <p class="sub">Fri–Sat 7:00 AM – 11:00 PM</p>
+    </div>
+    <div class="info-item">
+      <div class="icon">📞</div>
+      <h4>Contact</h4>
+      <p>(323) 650-8999</p>
+      <p class="sub">info@ivoryonsunset.com</p>
+    </div>
+  </div>
+
+  <section class="cta-banner">
+    <h2>Ready for a New Look?</h2>
+    <p>Your website is currently broken — customers can't find you online. Let's fix that with a modern, mobile-friendly site.</p>
+    <a href="#" class="btn-primary">Let's Talk</a>
+  </section>
+
+  <footer>
+    &copy; 2026 Ivory on Sunset &middot; Proposed redesign by DYE Design
+  </footer>
+</div>
+</body>
+</html>
