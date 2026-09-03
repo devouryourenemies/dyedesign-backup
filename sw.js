@@ -1,5 +1,5 @@
-// MECHA TERMINAL Service Worker — static asset cache
-const CACHE = 'mecha-terminal-v1';
+// MECHA TERMINAL Service Worker — v2 with network-first for HTML/JS
+const CACHE = 'mecha-terminal-v2';
 const ASSETS = [
   '/',
   '/favicon.svg',
@@ -20,15 +20,25 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const { request } = e;
   const url = new URL(request.url);
-  // Cache static assets: fonts, CSS, JS chunks, images, sprites
-  if (
-    url.origin === self.location.origin &&
-    (url.pathname.match(/\.(woff2?|ttf|otf|eot|css|js|png|jpg|jpeg|gif|svg|webp|ico|mp4|wav|mp3)$/i) ||
-     url.pathname.startsWith('/_next/static/') ||
-     url.pathname.startsWith('/sprites/') ||
-     url.pathname.startsWith('/assets/') ||
-     url.pathname.startsWith('/dist/'))
-  ) {
+  if (url.origin !== self.location.origin) return;
+
+  // Network-first for HTML and JS (ensures fresh content)
+  if (url.pathname.endsWith('.html') || url.pathname === '/' ||
+      url.pathname.endsWith('.js') || url.pathname.startsWith('/_next/static/chunks/')) {
+    e.respondWith(
+      fetch(request).then((res) => {
+        const clone = res.clone();
+        caches.open(CACHE).then((c) => c.put(request, clone));
+        return res;
+      }).catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Cache-first for stable assets (fonts, images, sprites)
+  if (url.pathname.match(/\.(woff2?|ttf|otf|eot|css|png|jpg|jpeg|gif|svg|webp|ico|mp4|wav|mp3)$/i) ||
+      url.pathname.startsWith('/sprites/') ||
+      url.pathname.startsWith('/assets/')) {
     e.respondWith(
       caches.match(request).then((cached) => cached || fetch(request).then((res) => {
         const clone = res.clone();
